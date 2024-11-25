@@ -3,27 +3,44 @@
 #include <GL/glut.h>
 #include "Nivel1.h"
 #include "Nivel2.h"
+#include "Nivel3.h"
 
 // Variable global para el nivel actual
 int nivelActual = 1;
 
 void onDisplay() {
     // Renderiza el nivel actual
-    if (nivelActual == 1) {
+    switch (nivelActual)
+    {
+    case 1:
         renderNivel1();
-    }
-    else if (nivelActual == 2) {
+        break;
+    case 2:
         renderNivel2();
+        break;
+    case 3:
+        renderNivel3();
+        break;
+    default:
+        break;
     }
 }
 
 void onUpdate(int value) {
     // Actualiza la lógica del nivel actual
-    if (nivelActual == 1) {
+    switch (nivelActual)
+    {
+    case 1:
         updateNivel1();
-    }
-    else if (nivelActual == 2) {
+        break;
+    case 2:
         updateNivel2();
+        break;
+    case 3:
+        updateNivel3();
+        break;
+    default:
+        break;
     }
 
     // Llama nuevamente a esta función después de 16ms (~60 FPS)
@@ -32,17 +49,29 @@ void onUpdate(int value) {
 
 void onKeyboard(unsigned char key, int x, int y) {
     // Cambia de nivel con teclas
-    if (key == '1') {
+
+    switch (key)
+    {
+    case '1':
         nivelActual = 1;
         initNivel1();
-        printf("Presionando 1\n");
+        printf("Tecla 1 presionada\n");
         glutPostRedisplay();
-    }
-    else if (key == '2') {
+        break;
+    case '2':
         nivelActual = 2;
         initNivel2();
-        printf("Presionando 2\n");
+        printf("Tecla 2 presionada\n");
         glutPostRedisplay();
+        break;
+    case '3':
+        nivelActual = 3;
+        initNivel3();
+        printf("Tecla 3 presionada\n");
+        glutPostRedisplay();
+        break;
+    default:
+        break;
     }
 }
 

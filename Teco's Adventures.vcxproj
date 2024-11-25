@@ -132,10 +132,12 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Nivel1.cpp" />
     <ClCompile Include="Nivel2.cpp" />
+    <ClCompile Include="Nivel3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Nivel1.h" />
     <ClInclude Include="Nivel2.h" />
+    <ClInclude Include="Nivel3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
