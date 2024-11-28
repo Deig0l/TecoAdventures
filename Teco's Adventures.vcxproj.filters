@@ -15,22 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Nivel1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Nivel2.cpp">
+    <ClCompile Include="GestorDeRecursos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Nivel3.cpp">
+    <ClCompile Include="Inicio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +32,10 @@
     <ClInclude Include="Nivel1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Nivel2.h">
+    <ClInclude Include="GestorDeRecursos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Nivel3.h">
+    <ClInclude Include="Inicio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
