@@ -78,7 +78,7 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         finalizar();
         printf("Eso es todo viejo, hasta la próxima!\n");
         exit(0);
-        break;
+        break;  
     case '1':
         nivelActual = 1;
         pantallaBlanca = false; // Sal de la pantalla blanca
