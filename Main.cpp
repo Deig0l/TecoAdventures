@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
     glutCreateWindow("Teco's Adventures");
 
     inicializacion();
+    glutIdleFunc(mostrar);
     glutDisplayFunc(mostrar);
     glutKeyboardFunc(tecladoNoEspecial);
 
@@ -40,7 +41,7 @@ void inicializacion() {
     glEnable(GL_TEXTURE_2D);
 
     // Inicializar pantalla de inicio y cargar imágenes
-    pantallaInicio = new Inicio(&gestorRecursos, 500); // Cambiar cada 500 ms
+    pantallaInicio = new Inicio(&gestorRecursos, 200); // Cambiar cada 500 ms
     pantallaInicio->cargarImagenes("inicio1", "Imagenes/Inicio/inicio1.png", "inicio2", "Imagenes/Inicio/inicio2.png");
 }
 
