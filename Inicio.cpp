@@ -37,8 +37,8 @@ void Inicio::renderizar() {
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f); // Esquina inferior izquierda
         glTexCoord2f(1.0f, 1.0f); glVertex3f(800.0f, 0.0f, 0.0f);  // Esquina inferior derecha
-        glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 600.0f, 0.0f);   // Esquina superior derecha
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 600.0f, 0.0f);  // Esquina superior izquierda
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);   // Esquina superior derecha
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);  // Esquina superior izquierda
         glEnd();
     }
     else {

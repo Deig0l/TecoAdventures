@@ -8,17 +8,17 @@ void initNivel1() {
 
 void renderNivel1() {
     glClear(GL_COLOR_BUFFER_BIT); // Limpia el buffer
-
     // Renderiza un cuadrado escalado y centrado
     glPushMatrix();
-    glScalef(100.0f, 100.0f, 1.0f); // Escalar el cuadrado para que sea visible
     glBegin(GL_QUADS);
     glColor3f(0.0f, 1.0f, 0.0f);    // Color verde
-    glVertex3f(-0.5f, -0.5f, 0.0f);
-    glVertex3f(0.5f, -0.5f, 0.0f);
-    glVertex3f(0.5f, 0.5f, 0.0f);
-    glVertex3f(-0.5f, 0.5f, 0.0f);
+    //x400 y320
+    glVertex2f(300,220);//II
+    glVertex2f(500,220);//ID
+    glVertex2f(500,420);//SD
+    glVertex2f(300,420);//SI
     glEnd();
+    
     glPopMatrix();
 }
 

@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
+    glutInitWindowSize(800, 640);
     glutCreateWindow("Teco's Adventures");
 
     inicializacion();
@@ -52,7 +52,7 @@ void inicializacion() {
     glClearColor(1.0, 1.0, 1.0, 1.0); // Fondo blanco inicial
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0, 800.0, 0, 600.0);
+    gluOrtho2D(0, 800.0, 0, 640.0);
     glEnable(GL_TEXTURE_2D);
 
     // Inicializar pantalla de inicio y cargar imágenes
@@ -72,10 +72,15 @@ void mostrar() {
 
     // Renderiza el nivel actual si no está en modo pantalla blanca
     switch (nivelActual) {
-    case 0:
-        pantallaMapa->renderizar();
+    case 0: // Mapa
+        if (pantallaMapa) {
+            pantallaMapa->renderizar();
+        }
+        else {
+            std::cerr << "Error: pantallaMapa no está inicializada." << std::endl;
+        }
         break;
-    case 1:
+    case 1: // Nivel 1
         renderNivel1();
         break;
     default:
@@ -100,14 +105,13 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         break;
     case 13: //ENTER
         printf("Tecla ENTER presionada\n");
-        if (nivelActual > 0) { //todos los niveles
+        if (nivelActual > 0) { // Todos los niveles
             printf("Se entro al IF, nivel actual: %d\n", nivelActual);
         }
-        else // mapa o inicio
-        {
-            nivelActual = (nivelActual == -1) ? 0 : 0;
+        else { // Mapa o inicio
+            nivelActual = (nivelActual == -1) ? 0 : 0; // Asegúrate de que esto esté bien
             printf("Se entro al ELSE, nivel actual: %d\n", nivelActual);
-            ComprobacionInicioMapa();
+            ComprobacionInicioMapa(); // Cargar el mapa
         }
         break;
     case '1':
@@ -116,7 +120,7 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         printf("Tecla 1 presionada\n");
         initNivel1(); // Configura el nivel 1
         break;
-    case 'm': //De menu
+    case 'm': // De menú
         printf("Tecla m presionada\n");
         nivelActual = -1;
         mostrarInicio = true; // Activa la pantalla blanca
@@ -132,18 +136,20 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
 void ComprobacionInicioMapa() {
     switch (nivelActual) {
     case -1: //Inicio
-
         break;
-    case 0: //Mapa
-        //cargamos imagenes y renderizamos
-        pantallaMapa = new Mapa(&gestorRecursos);
-        pantallaMapa->cargarImagenes(
-            "MapaNivel1", "Imagenes/Mapa/TecMapN1.png",
-            "MapaNivel2", "Imagenes/Mapa/TecMapN2.png",
-            "MapaNivel3", "Imagenes/Mapa/TecMapN3.png");
+    case 0: // Mapa
+        if (!pantallaMapa) {
+            // Crear una nueva instancia de Mapa
+            pantallaMapa = new Mapa(&gestorRecursos);
+            pantallaMapa->cargarImagenes(
+                "MapaNivel1", "Imagenes/Mapa/TecMapN1.png",
+                "MapaNivel2", "Imagenes/Mapa/TecMapN2.png",
+                "MapaNivel3", "Imagenes/Mapa/TecMapN3.png");
+        }
         break;
     default:
         break;
     }
-    glutPostRedisplay();
+
+    glutPostRedisplay(); // Solicita redibujar la pantalla
 }
