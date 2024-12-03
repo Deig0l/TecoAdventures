@@ -52,7 +52,7 @@ void inicializacion() {
     glClearColor(1.0, 1.0, 1.0, 1.0); // Fondo blanco inicial
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-400.0, 400.0, -300.0, 300.0);
+    gluOrtho2D(0, 800.0, 0, 600.0);
     glEnable(GL_TEXTURE_2D);
 
     // Inicializar pantalla de inicio y cargar imágenes

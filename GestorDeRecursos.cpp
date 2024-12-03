@@ -3,6 +3,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h" // Implementación de stb_image solo aquí
 
+//Sirve para cargar imagenes
+
 // Implementación de cargarTextura
 GLuint GestorRecursos::cargarTextura(const std::string& nombre, const char* archivo) {
     if (texturas.find(nombre) != texturas.end()) {
