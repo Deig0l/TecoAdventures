@@ -75,6 +75,7 @@ int main(int argc, char** argv) {
     //glutIdleFunc(mostrar);//permite que imagenes que alternan se muestren
     glutDisplayFunc(mostrar);
     glutKeyboardFunc(tecladoNoEspecial);
+    glutSpecialFunc(controlesEspecial);
 
     glutMainLoop();
     return 0;
