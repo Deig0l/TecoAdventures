@@ -70,11 +70,11 @@ void crearNivel(int n) {
 		break;
 	case 2:
 		velocidad = 0.2;
-		glutTimerFunc(0, secuenciaNivel2, 0);
+		//glutTimerFunc(0, secuenciaNivel2, 0);
 		break;
 	case 3:
 		velocidad = 0.3;
-		glutTimerFunc(0, secuenciaNivel3, 0);
+		/*glutTimerFunc(0, secuenciaNivel3, 0);*/
 		break;
 	default:
 		break;

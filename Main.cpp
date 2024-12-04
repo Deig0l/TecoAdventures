@@ -139,7 +139,6 @@ void showMapa() {
 }
 
 void showN1() {
-    glutTimerFunc(0, secuenciaNivel1, 0);
     crearNivel(1);
     //pantallaNivel1->renderizarNivel1();
     //renderizarNivel1();
@@ -163,12 +162,15 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         break;
     case '1':
         unoTecleado();
+        glutTimerFunc(0, secuenciaNivel1, 0);
         break;
     case '2':
         dosTecleado();
+        glutTimerFunc(0, secuenciaNivel2, 0);
         break;
     case '3':
         tresTecleado();
+        glutTimerFunc(0, secuenciaNivel3, 0);
         break;
     case 'm': // De menú
         emeTecleado();
