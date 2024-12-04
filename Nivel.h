@@ -15,6 +15,7 @@
 #include "Secuencia.h"
 using namespace std;
 
+void inicializarFlechas();
 void crearNivel(int n);
 void inicializacionNivel(void);
 void writeBitmapString(void* font, const char* string);

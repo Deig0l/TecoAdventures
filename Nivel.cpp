@@ -57,15 +57,15 @@ void inicializarFlechas() {
 }
 
 void crearNivel(int n) {
-	inicializarFlechas();
-	inicializacionNivel();
+	//inicializarFlechas();
+	//inicializacionNivel();
 	//glutTimerFunc(0, secuenciaNivel1, 0);
 	switch (n)
 	{
 	case 1:
 		velocidad = 0.1;
 		glutTimerFunc(0, secuenciaNivel1, 0);
-		glutTimerFunc(21500, finishLevel, 0);
+		//glutTimerFunc(21500, finishLevel, 0);
 		break;
 	case 2:
 		velocidad = 0.2;
@@ -78,10 +78,11 @@ void crearNivel(int n) {
 	default:
 		break;
 	}
-	glutDisplayFunc(mostrarNivel);
+	mostrarNivel();
+	/*glutDisplayFunc(mostrarNivel);
 	glutKeyboardFunc(controlesJuego);
 	glutSpecialFunc(controlesEspecial);
-	glutMainLoop();
+	glutMainLoop();*/
 }
 
 void inicializacionNivel(void) {

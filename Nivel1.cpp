@@ -55,6 +55,8 @@ void Nivel1::renderizarNivel1() {
     else {
         std::cerr << "Error: No se pudo obtener la textura actual para renderizar." << std::endl;
     }
+
+    //crearNivel(1);
 }
 
 void Nivel1::cargarImagenes(const std::string& nombre1, const std::string& ruta1) {
