@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
 
     inicializacion();
 
-    //inicializarFlechas();
+    inicializarFlechas();
 
     //glutIdleFunc(mostrar);//permite que imagenes que alternan se muestren
     glutDisplayFunc(mostrar);
@@ -107,8 +107,7 @@ void mostrar() {
         showMapa();
         break;
     case 1: // Nivel 1
-        //howN1();
-        crearNivel(1);
+        showN1();
         break;
     case 2:
         showN2();
@@ -140,7 +139,9 @@ void showMapa() {
 }
 
 void showN1() {
-    pantallaNivel1->renderizarNivel1();
+    glutTimerFunc(0, secuenciaNivel1, 0);
+    crearNivel(1);
+    //pantallaNivel1->renderizarNivel1();
     //renderizarNivel1();
 }
 

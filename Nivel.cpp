@@ -63,8 +63,9 @@ void crearNivel(int n) {
 	switch (n)
 	{
 	case 1:
+		//velocidad = 0.1;
 		velocidad = 0.1;
-		glutTimerFunc(0, secuenciaNivel1, 0);
+		/*glutTimerFunc(0, secuenciaNivel1, 0);*/
 		//glutTimerFunc(21500, finishLevel, 0);
 		break;
 	case 2:
