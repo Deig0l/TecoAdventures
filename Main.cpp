@@ -7,10 +7,13 @@ SOMNIAWORKS Todos los derechos reservados (C) 2024
 Este programa esta sobre la licencia GPL-3.0
 
 */
+
+//Trying to solve merging conflicts
 #include <iostream>
 #include <vector>
 #include <GL/glut.h>
 #include "Nivel1.h"
+#include "Nivel2.h"
 #include "GestorDeRecursos.h"
 #include "Inicio.h"
 #include "Mapa.h"
@@ -20,6 +23,7 @@ GestorRecursos gestorRecursos;
 Inicio* pantallaInicio; // Instancia de la clase Inicio para alternar imágenes
 Mapa* pantallaMapa; //Instancia de clase Mapa para mostrar avance de juego
 Nivel1* pantallaNivel1;
+Nivel2* pantallaNivel2;
 
 // Variables Globales
 int nivelActual = -1;
@@ -42,10 +46,12 @@ void mostrar();
 void showInicio();
 void showMapa();
 void showN1();
+void showN2();
 void tecladoNoEspecial(unsigned char key, int x, int y);
 void finalizar();
 void enterTecleado();
 void unoTecleado();
+void dosTecleado();
 void emeTecleado();
 
 int main(int argc, char** argv) {
@@ -92,6 +98,9 @@ void mostrar() {
     case 1: // Nivel 1
         showN1();
         break;
+    case 2:
+        showN2();
+        break;
     default:
         break;
     }
@@ -119,6 +128,10 @@ void showN1() {
     //renderizarNivel1();
 }
 
+void showN2() {
+    pantallaNivel2->renderizarNivel2();
+}
+
 void tecladoNoEspecial(unsigned char key, int x, int y) {
     switch (key) {
     case 27: //ESC
@@ -129,6 +142,9 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         break;
     case '1':
         unoTecleado();
+        break;
+    case '2':
+        dosTecleado();
         break;
     case 'm': // De menú
         emeTecleado();
@@ -175,6 +191,17 @@ void unoTecleado() {
     if (!pantallaNivel1) {
         pantallaNivel1 = new Nivel1(&gestorRecursos);
         pantallaNivel1->initNivel1();
+    }
+    //initNivel1(); // Configura el nivel 1
+}
+
+void dosTecleado() {
+    nivelActual = 2;
+    mostrarInicio = false; // Sal de la pantalla blanca
+    printf("Tecla 2 presionada\n");
+    if (!pantallaNivel2) {
+        pantallaNivel2 = new Nivel2(&gestorRecursos);
+        pantallaNivel2->initNivel2();
     }
     //initNivel1(); // Configura el nivel 1
 }

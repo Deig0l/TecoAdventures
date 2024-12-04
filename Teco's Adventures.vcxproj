@@ -136,6 +136,7 @@
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Nivel.cpp" />
     <ClCompile Include="Nivel1.cpp" />
+    <ClCompile Include="Nivel2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Colores.h" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Nivel.h" />
     <ClInclude Include="Nivel1.h" />
+    <ClInclude Include="Nivel2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
