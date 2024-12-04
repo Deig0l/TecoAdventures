@@ -1,33 +1,18 @@
 #include "Nivel.h"
 
-//float LFx = 50;
-//float UPx = 200;
-//float DWx = 350;
-//float RTx = 500;
-
 float LFx = 30;
 float UPx = 130;
 float DWx = 230;
 float RTx = 330;
 
 int numFlechas = 10;
-//float posicionOrigenY = -110.0;
 float posicionOrigenY = -88.0;
-//float posicionMaxY = 700.0;
 float posicionMaxY = 640.0;
 float velocidad = 0.2;
 
 int score = 0;
 
-//float metaY = 570;
 float metaY = 500;
-
-//float t1 = 7;
-//float t2 = 25;
-//float t3 = 45;
-//float t4 = 70;
-//float t5 = 90;
-//float t6 = 109;
 
 float t1 = 6;
 float t2 = 20;
@@ -36,22 +21,14 @@ float t4 = 56;
 float t5 = 72;
 float t6 = 87;
 
+bool win = false;
+
+float N1win = 140.0;
+
 int topLF = 0;
 int topUP = 0;
 int topDW = 0;
 int topRT = 0;
-
-//FlechaLEFT fLFSilueta(LFx, metaY);
-//FlechaLEFT fLF0(LFx, posicionOrigenY, YELLOW);
-//
-//FlechaUP fUPSilueta(UPx, metaY);
-//FlechaUP fUP0(UPx, posicionOrigenY, BLUE);
-//
-//FlechaDOWN fDWSilueta(DWx, metaY);
-//FlechaDOWN fDW0(DWx, posicionOrigenY, RED);
-//
-//FlechaRIGHT fRTSilueta(RTx, metaY);
-//FlechaRIGHT fRT0(RTx, posicionOrigenY, GREEN);
 
 FlechaLEFT fLFSilueta(LFx, metaY, 8);
 FlechaLEFT fLF0(LFx, posicionOrigenY, 8, YELLOW);
@@ -65,24 +42,30 @@ FlechaDOWN fDW0(DWx, posicionOrigenY, 8, RED);
 FlechaRIGHT fRTSilueta(RTx, metaY, 8);
 FlechaRIGHT fRT0(RTx, posicionOrigenY, 8, GREEN);
 
-FlechaLEFT fLFArray[10] = { fLF0, fLF0, fLF0, fLF0, fLF0, fLF0, fLF0, fLF0, fLF0, fLF0 };
-FlechaUP fUPArray[10] = { fUP0, fUP0, fUP0, fUP0, fUP0, fUP0, fUP0, fUP0, fUP0, fUP0 };
-FlechaDOWN fDWArray[10] = { fDW0, fDW0, fDW0, fDW0, fDW0, fDW0, fDW0, fDW0, fDW0, fDW0 };
-FlechaRIGHT fRTArray[10] = { fRT0, fRT0, fRT0, fRT0, fRT0, fRT0, fRT0, fRT0, fRT0, fRT0 };
+FlechaLEFT fLFArray[10];
+FlechaUP fUPArray[10];
+FlechaDOWN fDWArray[10];
+FlechaRIGHT fRTArray[10];
+
+void inicializarFlechas() {
+	for (int i = 0; i < numFlechas; ++i) {
+		fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
+		fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
+		fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
+		fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
+	}
+}
 
 void crearNivel(int n) {
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowPosition(150, 50);
-	//glutInitWindowSize(1200, 700);
-	glutInitWindowSize(800, posicionMaxY);
-	glutCreateWindow("Prueba TecoAdventures");
-	inicializacionNivel();
+	inicializarFlechas();
+	inicializacion();
 	//glutTimerFunc(0, secuenciaNivel1, 0);
 	switch (n)
 	{
 	case 1:
 		velocidad = 0.1;
 		glutTimerFunc(0, secuenciaNivel1, 0);
+		glutTimerFunc(21500, finishLevel, 0);
 		break;
 	case 2:
 		velocidad = 0.2;
@@ -95,13 +78,17 @@ void crearNivel(int n) {
 	default:
 		break;
 	}
-	glutDisplayFunc(mostrarNivel);
+	glutDisplayFunc(mostrar);
 	glutKeyboardFunc(controlesJuego);
 	glutSpecialFunc(controlesEspecial);
 	glutMainLoop();
 }
 
-void inicializacionNivel(void) {
+void inicializacion(void) {
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowPosition(150, 50);
+	glutInitWindowSize(800, posicionMaxY);
+	glutCreateWindow("Prueba TecoAdventures");
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0.0, 800.0, 0.0, posicionMaxY);
@@ -114,21 +101,18 @@ void writeBitmapString(void* font, const char* string) {
 	}
 }
 
-void mostrarNivel(void) {
+void mostrar(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	escribirPuntuacion();
 
-	//Siluetas grises
+	// Siluetas grises
 	fDWSilueta.dibujar();
 	fUPSilueta.dibujar();
 	fLFSilueta.dibujar();
 	fRTSilueta.dibujar();
 
 	dibujarFlechas();
-	//dibujarFlechas(fDWArray, topDW);
-
-	glEnd();
 	glFlush();
 	glutPostRedisplay();
 }
@@ -254,60 +238,69 @@ void obtenerPuntos(float y) {
 	}
 }
 
+
 void calificarFlechaLF() {
-	obtenerPuntos(fLFArray[topLF].getY());
-	fLFArray[topLF].setMover(false);
-	printf("Posicion LEFT %d en Y: %f\n", topLF, fLFArray[topLF].getY());
-	fLFArray[topLF].setY(posicionOrigenY);
-	if (topLF < numFlechas - 1) {
-		topLF++;
+	if (fLFArray[topLF].getMover()) {
+		obtenerPuntos(fLFArray[topLF].getY());
+		fLFArray[topLF].setMover(false);
+		printf("Posicion LEFT %d en Y: %f\n", topLF, fLFArray[topLF].getY());
+		fLFArray[topLF].setY(posicionOrigenY);
+		if (topLF < numFlechas - 1) {
+			topLF++;
+		}
+		else {
+			topLF = 0;
+		}
+		printf("topLF: %d\n", topLF);
 	}
-	else {
-		topLF = 0;
-	}
-	printf("topLF: %d\n", topLF);
 }
 
 void calificarFlechaUP() {
-	obtenerPuntos(fUPArray[topUP].getY());
-	fUPArray[topUP].setMover(false);
-	printf("Posicion UP %d en Y: %f\n", topUP, fUPArray[topUP].getY());
-	fUPArray[topUP].setY(posicionOrigenY);
-	if (topUP < numFlechas - 1) {
-		topUP++;
+	if (fUPArray[topUP].getMover()) {
+		obtenerPuntos(fUPArray[topUP].getY());
+		fUPArray[topUP].setMover(false);
+		printf("Posicion UP %d en Y: %f\n", topUP, fUPArray[topUP].getY());
+		fUPArray[topUP].setY(posicionOrigenY);
+		if (topUP < numFlechas - 1) {
+			topUP++;
+		}
+		else {
+			topUP = 0;
+		}
+		printf("topLF: %d\n", topUP);
 	}
-	else {
-		topUP = 0;
-	}
-	printf("topLF: %d\n", topUP);
 }
 
 void calificarFlechaDW() {
-	obtenerPuntos(fDWArray[topDW].getY());
-	fDWArray[topDW].setMover(false);
-	printf("Posicion DOWN %d en Y: %f\n", topDW, fDWArray[topDW].getY());
-	fDWArray[topDW].setY(posicionOrigenY);
-	if (topDW < numFlechas - 1) {
-		topDW++;
+	if (fDWArray[topDW].getMover()) {
+		obtenerPuntos(fDWArray[topDW].getY());
+		fDWArray[topDW].setMover(false);
+		printf("Posicion DOWN %d en Y: %f\n", topDW, fDWArray[topDW].getY());
+		fDWArray[topDW].setY(posicionOrigenY);
+		if (topDW < numFlechas - 1) {
+			topDW++;
+		}
+		else {
+			topDW = 0;
+		}
+		printf("topDW: %d\n", topDW);
 	}
-	else {
-		topDW = 0;
-	}
-	printf("topDW: %d\n", topDW);
 }
 
 void calificarFlechaRT() {
-	obtenerPuntos(fRTArray[topRT].getY());
-	fRTArray[topRT].setMover(false);
-	printf("Posicion RIGHT %d en Y: %f\n", topRT, fRTArray[topRT].getY());
-	fRTArray[topRT].setY(posicionOrigenY);
-	if (topRT < numFlechas - 1) {
-		topRT++;
+	if (fRTArray[topRT].getMover()) {
+		obtenerPuntos(fRTArray[topRT].getY());
+		fRTArray[topRT].setMover(false);
+		printf("Posicion RIGHT %d en Y: %f\n", topRT, fRTArray[topRT].getY());
+		fRTArray[topRT].setY(posicionOrigenY);
+		if (topRT < numFlechas - 1) {
+			topRT++;
+		}
+		else {
+			topRT = 0;
+		}
+		printf("topRT: %d\n", topRT);
 	}
-	else {
-		topRT = 0;
-	}
-	printf("topRT: %d\n", topRT);
 }
 
 void incTopDW() {
@@ -335,7 +328,8 @@ void agregarFlechaRT(int n) {
 	fRTArray[n].setMover(true);
 }
 
-void finishGame(int) {
+
+void finishLevel(int) {
 	MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
 	exit(0);
 }
@@ -348,7 +342,6 @@ void controlesJuego(unsigned char key, int x, int y) {
 	case 27: //Esc
 		exit(1);
 		break;
-		glutPostRedisplay();
 	}
 }
 
@@ -372,4 +365,3 @@ void controlesEspecial(int key, int x, int y) {
 	}
 	glutPostRedisplay();
 }
-

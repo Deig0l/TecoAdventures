@@ -1,7 +1,7 @@
 #pragma once
 #ifndef FLECHA_H
 #define FLECHA_H
-#include <GL/freeglut.h>
+#include <GL/glut.h>
 #include "Figura.h"
 #include "Colores.h"
 

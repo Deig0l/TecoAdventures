@@ -1,7 +1,7 @@
 #pragma once
 #ifndef FIGURA_H
 #define FIGURA_H
-#include <GL/freeglut.h>
+#include <GL/glut.h>
 
 // Clase base abstracta Figura
 class Figura {

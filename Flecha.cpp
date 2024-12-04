@@ -85,13 +85,6 @@ void FlechaDOWN::setMover(bool b) {
 
 void FlechaDOWN::dibujar() /*const*/ {
 	asignarColor(color);
-	//Rectangulo rect(60, 50, 25 + x_origen, 60 + y_origen);
- //   rect.dibujar();
-	//glBegin(GL_TRIANGLES);
-	//glVertex2f(0 + x_origen, 60 + y_origen); // Vértice superior izquierdo
-	//glVertex2f(110 + x_origen, 60 + y_origen); // Vértice superior derecho
-	//glVertex2f(55 + x_origen, 0 + y_origen); // Vértice inferior
-	//glEnd();
 	Rectangulo rect(6 * size, 5 * size, (2.5 * size) + x_origen, (6 * size) + y_origen);
 	rect.dibujar();
 	glBegin(GL_TRIANGLES);
@@ -132,13 +125,6 @@ void FlechaLEFT::setMover(bool b) {
 
 void FlechaLEFT::dibujar() /*const*/ {
 	asignarColor(color);
-	//Rectangulo rect(50, 60, 60 + x_origen, 25 + y_origen);
-	//rect.dibujar();
-	//glBegin(GL_TRIANGLES);
-	//glVertex2f(60 + x_origen, 110 + y_origen); // Vértice superior
-	//glVertex2f(0 + x_origen, 55 + y_origen); // Vértice medio
-	//glVertex2f(60 + x_origen, y_origen); // Vértice inferior
-	//glEnd();
 	Rectangulo rect(5 * size, 6 * size, (6 * size) + x_origen, (2.5 * size) + y_origen);
 	rect.dibujar();
 	glBegin(GL_TRIANGLES);
@@ -187,4 +173,3 @@ void FlechaRIGHT::dibujar() /*const*/ {
 	glVertex2f((5 * size) + x_origen, y_origen); // Vértice inferior
 	glEnd();
 }
-

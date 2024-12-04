@@ -53,6 +53,7 @@ void enterTecleado();
 void unoTecleado();
 void dosTecleado();
 void emeTecleado();
+void masTecleado();
 
 int main(int argc, char** argv) {
 
@@ -150,6 +151,9 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
     case 'm': // De menú
         emeTecleado();
         break;
+    case '+':
+        masTecleado();
+        break;
     default:
         break;
     }
@@ -212,4 +216,10 @@ void emeTecleado() {
     nivelActual = -1;
     mostrarInicio = true; // Activa la pantalla blanca
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fondo blanco
+}
+
+void masTecleado() {
+    if (nivelActual == 0) {//si estamos en mapa
+        
+    }
 }

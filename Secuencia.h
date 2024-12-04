@@ -1,7 +1,7 @@
 #pragma once
 #ifndef SECUENCIA_H
 #define SECUENCIA_H
-#include <GL/freeglut.h>
+#include <GL/glut.h>
 
 #include "Nivel.h"
 

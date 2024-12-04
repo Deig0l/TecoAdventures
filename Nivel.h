@@ -2,7 +2,7 @@
 #ifndef NIVEL_H
 #define NIVEL_H
 
-#include <GL/freeglut.h>
+#include <GL/glut.h>
 #include <windows.h>
 #include <cmath>
 #include <iostream>
