@@ -339,8 +339,9 @@ void agregarFlechaRT(int n) {
 
 
 void finishLevel(int) {
-	MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
-	exit(0);
+	/*MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
+	exit(0);*/
+	
 }
 
 void idle() {

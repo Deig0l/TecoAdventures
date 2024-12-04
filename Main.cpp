@@ -164,6 +164,7 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
     case '1':
         unoTecleado();
         glutTimerFunc(0, secuenciaNivel1, 0);
+        glutTimerFunc(23000, finishLevel, 0);
         break;
     case '2':
         dosTecleado();
