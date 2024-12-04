@@ -36,6 +36,9 @@
     <ClCompile Include="Figura.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Flecha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Nivel1.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Figura.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flecha.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
