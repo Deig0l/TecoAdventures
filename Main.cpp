@@ -7,7 +7,6 @@ SOMNIAWORKS Todos los derechos reservados (C) 2024
 Este programa esta sobre la licencia GPL-3.0
 
 */
-
 #include <iostream>
 #include <vector>
 #include <GL/glut.h>
@@ -40,9 +39,12 @@ void inicializacion();
 void mostrar();
 void showInicio();
 void showMapa();
+void showN1();
 void tecladoNoEspecial(unsigned char key, int x, int y);
 void finalizar();
 void enterTecleado();
+void unoTecleado();
+void emeTecleado();
 
 int main(int argc, char** argv) {
 
@@ -52,7 +54,7 @@ int main(int argc, char** argv) {
     glutCreateWindow("Teco's Adventures");
 
     inicializacion();
-    glutIdleFunc(mostrar);
+    glutIdleFunc(mostrar);//permite que imagenes que alternan se muestren
     glutDisplayFunc(mostrar);
     glutKeyboardFunc(tecladoNoEspecial);
 
@@ -77,7 +79,6 @@ void inicializacion() {
 
 void mostrar() {
     glClear(GL_COLOR_BUFFER_BIT); // Limpia la pantalla
-
     // Renderiza la pantalla según el nivel actual
     switch (nivelActual) {
     case -1://Inicio
@@ -87,12 +88,11 @@ void mostrar() {
         showMapa();
         break;
     case 1: // Nivel 1
-        renderNivel1();
+        showN1();
         break;
     default:
         break;
     }
-
     glutSwapBuffers(); // Intercambia buffers
 }
 
@@ -105,11 +105,15 @@ void showInicio() {
 
 void showMapa() {
     if (pantallaMapa) {
-        pantallaMapa->renderizar();
+        pantallaMapa->renderizarMapa();
     }
     else {
         std::cerr << "Error: pantallaMapa no está inicializada." << std::endl;
     }
+}
+
+void showN1() {
+    renderizarNivel1();
 }
 
 void tecladoNoEspecial(unsigned char key, int x, int y) {
@@ -121,16 +125,10 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         enterTecleado();
         break;
     case '1':
-        nivelActual = 1;
-        mostrarInicio = false; // Sal de la pantalla blanca
-        printf("Tecla 1 presionada\n");
-        initNivel1(); // Configura el nivel 1
+        unoTecleado();
         break;
     case 'm': // De menú
-        printf("Tecla m presionada\n");
-        nivelActual = -1;
-        mostrarInicio = true; // Activa la pantalla blanca
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fondo blanco
+        emeTecleado();
         break;
     default:
         break;
@@ -160,9 +158,23 @@ void enterTecleado() {
             mostrarInicio = false;
             if (!pantallaMapa) { // Crear pantallaMapa si no está inicializado
                 pantallaMapa = new Mapa(&gestorRecursos);
-                pantallaMapa->init(); // Inicializar el mapa
+                pantallaMapa->initMapa(); // Inicializar el mapa
             }
         }
         printf("Se entro al ELSE, nivel actual: %d\n", nivelActual);
     }
+}
+
+void unoTecleado() {
+    nivelActual = 1;
+    mostrarInicio = false; // Sal de la pantalla blanca
+    printf("Tecla 1 presionada\n");
+    initNivel1(); // Configura el nivel 1
+}
+
+void emeTecleado() {
+    printf("Tecla m presionada\n");
+    nivelActual = -1;
+    mostrarInicio = true; // Activa la pantalla blanca
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fondo blanco
 }

@@ -6,7 +6,7 @@ void initNivel1() {
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Fondo azul
 }
 
-void renderNivel1() {
+void renderizarNivel1() {
     glClear(GL_COLOR_BUFFER_BIT); // Limpia el buffer
     glDisable(GL_TEXTURE_2D);
     // Renderiza un cuadrado escalado y centrado

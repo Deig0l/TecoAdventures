@@ -7,7 +7,7 @@
 Mapa::Mapa(GestorRecursos* gestor)
     : gestorRecursos(gestor), indiceActual(0) {}
 
-void Mapa::init() {
+void Mapa::initMapa() {
     // Si las imágenes ya están cargadas, no las recargues
     if (imagenes.empty()) {
         cargarImagenes(
@@ -31,7 +31,7 @@ void Mapa::cargarImagenes(const std::string& nombre1, const std::string& ruta1,
 }
 
 // Método para renderizar la imagen actual
-void Mapa::renderizar() {
+void Mapa::renderizarMapa() {
     // Limpia la pantalla con el color de fondo
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Fondo negro
     glClear(GL_COLOR_BUFFER_BIT);
