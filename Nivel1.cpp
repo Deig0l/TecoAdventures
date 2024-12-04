@@ -8,6 +8,7 @@ void initNivel1() {
 
 void renderNivel1() {
     glClear(GL_COLOR_BUFFER_BIT); // Limpia el buffer
+    glDisable(GL_TEXTURE_2D);
     // Renderiza un cuadrado escalado y centrado
     glPushMatrix();
     glBegin(GL_QUADS);
@@ -18,8 +19,8 @@ void renderNivel1() {
     glVertex2f(500,420);//SD
     glVertex2f(300,420);//SI
     glEnd();
-    
     glPopMatrix();
+    glEnable(GL_TEXTURE_2D);
 }
 
 void updateNivel1() {
