@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Colores.cpp" />
     <ClCompile Include="GestorDeRecursos.cpp" />
     <ClCompile Include="Inicio.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Nivel1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Colores.h" />
     <ClInclude Include="GestorDeRecursos.h" />
     <ClInclude Include="Inicio.h" />
     <ClInclude Include="Mapa.h" />
