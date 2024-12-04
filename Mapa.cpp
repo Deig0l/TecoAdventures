@@ -16,6 +16,8 @@ void Mapa::initMapa() {
             "MapaNivel3", "Imagenes/Mapa/TecMapN3.png");
     }
     imagenes.push_back("MapaNivel1");
+    imagenes.push_back("MapaNivel2");
+    imagenes.push_back("MapaNivel3");
 }
 
 // Método para cargar las dos imágenes

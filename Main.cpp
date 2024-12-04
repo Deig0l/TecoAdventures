@@ -19,9 +19,11 @@ Este programa esta sobre la licencia GPL-3.0
 GestorRecursos gestorRecursos;
 Inicio* pantallaInicio; // Instancia de la clase Inicio para alternar imágenes
 Mapa* pantallaMapa; //Instancia de clase Mapa para mostrar avance de juego
+Nivel1* pantallaNivel1;
 
 // Variables Globales
 int nivelActual = -1;
+int nivelesDesbloqueados = 1;
 bool mostrarInicio = true; // Controla si solo se muestra una pantalla en blanco
 /*
 Para cuestiones de debug se proponen que nivelActual sea:
@@ -113,7 +115,8 @@ void showMapa() {
 }
 
 void showN1() {
-    renderizarNivel1();
+    pantallaNivel1->renderizarNivel1();
+    //renderizarNivel1();
 }
 
 void tecladoNoEspecial(unsigned char key, int x, int y) {
@@ -169,7 +172,11 @@ void unoTecleado() {
     nivelActual = 1;
     mostrarInicio = false; // Sal de la pantalla blanca
     printf("Tecla 1 presionada\n");
-    initNivel1(); // Configura el nivel 1
+    if (!pantallaNivel1) {
+        pantallaNivel1 = new Nivel1(&gestorRecursos);
+        pantallaNivel1->initNivel1();
+    }
+    //initNivel1(); // Configura el nivel 1
 }
 
 void emeTecleado() {
