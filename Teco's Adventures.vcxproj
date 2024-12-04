@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Colores.cpp" />
     <ClCompile Include="Figura.cpp" />
+    <ClCompile Include="Flecha.cpp" />
     <ClCompile Include="GestorDeRecursos.cpp" />
     <ClCompile Include="Inicio.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="Colores.h" />
     <ClInclude Include="Figura.h" />
+    <ClInclude Include="Flecha.h" />
     <ClInclude Include="GestorDeRecursos.h" />
     <ClInclude Include="Inicio.h" />
     <ClInclude Include="Mapa.h" />
