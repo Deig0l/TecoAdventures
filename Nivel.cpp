@@ -67,17 +67,18 @@ void crearNivel(int n) {
 	switch (n)
 	{
 	case 1:
+		//velocidad = 0.1;
 		velocidad = 0.1;
-		glutTimerFunc(0, secuenciaNivel1, 0);
+		/*glutTimerFunc(0, secuenciaNivel1, 0);*/
 		//glutTimerFunc(21500, finishLevel, 0);
 		break;
 	case 2:
 		velocidad = 0.2;
-		glutTimerFunc(0, secuenciaNivel2, 0);
+		//glutTimerFunc(0, secuenciaNivel2, 0);
 		break;
 	case 3:
 		velocidad = 0.3;
-		glutTimerFunc(0, secuenciaNivel3, 0);
+		/*glutTimerFunc(0, secuenciaNivel3, 0);*/
 		break;
 	default:
 		break;
@@ -371,8 +372,9 @@ void agregarFlechaRT(int n) {
 
 
 void finishLevel(int) {
-	MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
-	exit(0);
+	/*MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
+	exit(0);*/
+	
 }
 
 void idle() {
