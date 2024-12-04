@@ -16,9 +16,9 @@ using namespace std;
 #include "Secuencia.h"
 
 void crearNivel(int n);
-void inicializacion(void);
+void inicializacionNivel(void);
 void writeBitmapString(void* font, const char* string);
-void mostrar(void);
+void mostrarNivel(void);
 void escribirPuntuacion();
 void dibujarFlechas();
 //void dibujarFlechas(Flecha fArray[10], int top);

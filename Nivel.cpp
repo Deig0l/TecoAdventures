@@ -76,7 +76,7 @@ void crearNivel(int n) {
 	//glutInitWindowSize(1200, 700);
 	glutInitWindowSize(800, posicionMaxY);
 	glutCreateWindow("Prueba TecoAdventures");
-	inicializacion();
+	inicializacionNivel();
 	//glutTimerFunc(0, secuenciaNivel1, 0);
 	switch (n)
 	{
@@ -95,13 +95,13 @@ void crearNivel(int n) {
 	default:
 		break;
 	}
-	glutDisplayFunc(mostrar);
+	glutDisplayFunc(mostrarNivel);
 	glutKeyboardFunc(controlesJuego);
 	glutSpecialFunc(controlesEspecial);
 	glutMainLoop();
 }
 
-void inicializacion(void) {
+void inicializacionNivel(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0.0, 800.0, 0.0, posicionMaxY);
@@ -114,7 +114,7 @@ void writeBitmapString(void* font, const char* string) {
 	}
 }
 
-void mostrar(void) {
+void mostrarNivel(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	escribirPuntuacion();
