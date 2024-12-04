@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 #include <string>
 #include <vector>
+#include "Nivel.h"
 
 //void initNivel1();       // Inicializa los recursos para el nivel 1
 //void renderizarNivel1();     // Renderiza el nivel 1

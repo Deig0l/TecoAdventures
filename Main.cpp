@@ -18,6 +18,7 @@ Este programa esta sobre la licencia GPL-3.0
 #include "Inicio.h"
 #include "Mapa.h"
 #include <Windows.h>
+#include "Nivel.h"
 
 // Instancias globales
 GestorRecursos gestorRecursos;
@@ -68,6 +69,9 @@ int main(int argc, char** argv) {
     glutCreateWindow("Teco's Adventures");
 
     inicializacion();
+
+    //inicializarFlechas();
+
     //glutIdleFunc(mostrar);//permite que imagenes que alternan se muestren
     glutDisplayFunc(mostrar);
     glutKeyboardFunc(tecladoNoEspecial);
@@ -103,7 +107,8 @@ void mostrar() {
         showMapa();
         break;
     case 1: // Nivel 1
-        showN1();
+        //howN1();
+        crearNivel(1);
         break;
     case 2:
         showN2();
