@@ -7,6 +7,8 @@ SOMNIAWORKS Todos los derechos reservados (C) 2024
 Este programa esta sobre la licencia GPL-3.0
 
 */
+
+//Trying to solve merging conflicts
 #include <iostream>
 #include <vector>
 #include <GL/glut.h>
