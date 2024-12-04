@@ -2,6 +2,9 @@
 #ifndef NIVEL_H
 #define NIVEL_H
 
+#include <vector>
+#include <string>
+
 #include <GL/glut.h>
 #include <windows.h>
 #include <cmath>
@@ -11,9 +14,9 @@
 #include "Colores.h"
 #include <iostream>
 #include <string> // for string and to_string()
-using namespace std;
-
+#include "GestorDeRecursos.h"
 #include "Secuencia.h"
+using namespace std;
 
 void inicializarFlechas();
 void crearNivel(int n);
@@ -22,7 +25,6 @@ void writeBitmapString(void* font, const char* string);
 void mostrarNivel(void);
 void escribirPuntuacion();
 void dibujarFlechas();
-//void dibujarFlechas(Flecha fArray[10], int top);
 void obtenerPuntos(float y);
 void calificarFlechaLF();
 void calificarFlechaUP();
@@ -37,5 +39,10 @@ void finishLevel(int);
 void idle();
 void controlesJuego(unsigned char key, int x, int y);
 void controlesEspecial(int key, int x, int y);
+
+void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
+    const std::string& nombre2, const std::string& ruta2,
+    const std::string& nombre3, const std::string& ruta3);
+void renderizarMapa();
 
 #endif
