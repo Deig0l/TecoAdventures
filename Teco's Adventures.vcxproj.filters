@@ -30,9 +30,6 @@
     <ClCompile Include="Mapa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Nivel2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Nivel1.h">
@@ -47,7 +44,7 @@
     <ClInclude Include="Mapa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Nivel2.h">
+    <ClInclude Include="Colores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
