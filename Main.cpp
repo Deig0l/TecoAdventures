@@ -111,10 +111,10 @@ void mostrar() {
         showN1();
         break;
     case 2:
-        crearNivel(2);
+        showN2();
         break;
     case 3:
-        crearNivel(3);
+        showN3();
         break;
     default:
         break;
@@ -146,11 +146,13 @@ void showN1() {
 }
 
 void showN2() {
-    pantallaNivel2->renderizarNivel2();
+    crearNivel(2);
+    //pantallaNivel2->renderizarNivel2();
 }
 
 void showN3() {
-    pantallaNivel3->renderizarNivel3();
+    crearNivel(3);
+    //pantallaNivel3->renderizarNivel3();
 }
 
 void tecladoNoEspecial(unsigned char key, int x, int y) {
