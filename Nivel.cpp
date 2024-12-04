@@ -93,6 +93,13 @@ void inicializacionNivel(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0.0, 800.0, 0.0, posicionMaxY);
+
+	cargarImagenes(
+		"FondoN1", "Imagenes/Niveles/BGN1.png",
+		"Fondo2", "Imagenes/Niveles/BGN2.png",
+		"Fondo3", "Imagenes/Niveles/BGN3.png"
+	);
+
 }
 
 void writeBitmapString(void* font, const char* string) {
@@ -365,4 +372,24 @@ void controlesEspecial(int key, int x, int y) {
 		break;
 	}
 	glutPostRedisplay();
+}
+
+std::vector<std::string> imagenes;
+GestorRecursos* gestorRecursos;
+
+void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
+	const std::string& nombre2, const std::string& ruta2,
+	const std::string& nombre3, const std::string& ruta3) {
+
+	gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
+	gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
+	gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
+	imagenes.push_back(nombre1);
+	imagenes.push_back(nombre2);
+	imagenes.push_back(nombre3);
+}
+
+
+void renderizarMapa(){
+	
 }

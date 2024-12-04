@@ -111,10 +111,10 @@ void mostrar() {
         crearNivel(1);
         break;
     case 2:
-        showN2();
+        crearNivel(2);
         break;
     case 3:
-        showN3();
+        crearNivel(3);
         break;
     default:
         break;
