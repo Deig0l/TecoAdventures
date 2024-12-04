@@ -25,7 +25,7 @@ Mapa* pantallaMapa; //Instancia de clase Mapa para mostrar avance de juego
 int nivelActual = -1;
 bool mostrarInicio = true; // Controla si solo se muestra una pantalla en blanco
 /*
-Para cuestiones de debug se propoen que nivelActual sea:
+Para cuestiones de debug se proponen que nivelActual sea:
 nivelActual = -1 --> Pantalla de Inicio
 nivelActual = 0 --> Mapa del tec (seleccionar niveles)
 nivelActual = 1 --> Nivel 1
@@ -38,8 +38,11 @@ se realizaran
 
 void inicializacion();
 void mostrar();
-void finalizar();
+void showInicio();
+void showMapa();
 void tecladoNoEspecial(unsigned char key, int x, int y);
+void finalizar();
+void enterTecleado();
 
 int main(int argc, char** argv) {
 
@@ -75,22 +78,13 @@ void inicializacion() {
 void mostrar() {
     glClear(GL_COLOR_BUFFER_BIT); // Limpia la pantalla
 
-    if (mostrarInicio) { // Mostrar pantalla de inicio
-        pantallaInicio->alternarImagen();
-        pantallaInicio->renderizar();
-        glutSwapBuffers();
-        return;
-    }
-
     // Renderiza la pantalla según el nivel actual
     switch (nivelActual) {
+    case -1://Inicio
+        showInicio();
+        break;
     case 0: // Mapa
-        if (pantallaMapa) {
-            pantallaMapa->renderizar();
-        }
-        else {
-            std::cerr << "Error: pantallaMapa no está inicializada." << std::endl;
-        }
+        showMapa();
         break;
     case 1: // Nivel 1
         renderNivel1();
@@ -102,13 +96,20 @@ void mostrar() {
     glutSwapBuffers(); // Intercambia buffers
 }
 
-void finalizar() {
-    gestorRecursos.liberarRecursos(); // Libera los recursos del gestor
-    delete pantallaInicio;            // Elimina la instancia de Inicio
-    delete pantallaMapa;
+void showInicio() {
+    if (mostrarInicio) { // Mostrar pantalla de inicio
+        pantallaInicio->alternarImagen();
+        pantallaInicio->renderizar();
+    }
+}
 
-    printf("Eso es todo viejo, hasta la proxima!\n");
-    exit(0);
+void showMapa() {
+    if (pantallaMapa) {
+        pantallaMapa->renderizar();
+    }
+    else {
+        std::cerr << "Error: pantallaMapa no está inicializada." << std::endl;
+    }
 }
 
 void tecladoNoEspecial(unsigned char key, int x, int y) {
@@ -117,21 +118,7 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
         finalizar();
         break;
     case 13: //ENTER
-        printf("Tecla ENTER presionada\n");
-        if (nivelActual > 0) { // Todos los niveles
-            printf("Se entro al IF, nivel actual: %d\n", nivelActual);
-        }
-        else { // Mapa o inicio
-            if (nivelActual == -1) {//Si esta en inicio cambiar a mapa
-                nivelActual = 0;
-                mostrarInicio = false;
-                if (!pantallaMapa) { // Crear pantallaMapa si no está inicializado
-                    pantallaMapa = new Mapa(&gestorRecursos);
-                    pantallaMapa->init(); // Inicializar el mapa
-                }
-            }
-            printf("Se entro al ELSE, nivel actual: %d\n", nivelActual);
-        }
+        enterTecleado();
         break;
     case '1':
         nivelActual = 1;
@@ -150,4 +137,32 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
     }
 
     glutPostRedisplay(); // Solicita redibujar la pantalla
+}
+
+void finalizar() {
+    gestorRecursos.liberarRecursos(); // Libera los recursos del gestor
+    delete pantallaInicio;            // Elimina la instancia de Inicio
+    delete pantallaMapa;
+
+    printf("Eso es todo viejo, hasta la proxima!\n");
+    exit(0);
+}
+
+void enterTecleado() {
+    printf("Tecla ENTER presionada\n");
+    if (nivelActual > 0) { // Todos los niveles
+        printf("Estamos en Mapa o niveles: %d\n", nivelActual);
+        printf("Se entro al IF, nivel actual: %d\n", nivelActual);
+    }
+    else { // Mapa o inicio
+        if (nivelActual == -1) {//Si esta en inicio cambiar a mapa
+            nivelActual = 0;
+            mostrarInicio = false;
+            if (!pantallaMapa) { // Crear pantallaMapa si no está inicializado
+                pantallaMapa = new Mapa(&gestorRecursos);
+                pantallaMapa->init(); // Inicializar el mapa
+            }
+        }
+        printf("Se entro al ELSE, nivel actual: %d\n", nivelActual);
+    }
 }
