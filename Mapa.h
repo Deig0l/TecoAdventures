@@ -5,15 +5,15 @@
 #include <vector>
 
 class Mapa {
-private:
-    GestorRecursos* gestorRecursos; // Puntero al gestor de recursos
-    std::vector<std::string> imagenes; // Nombres de las imágenes cargadas
-    int indiceActual; // Índice de la imagen actual
-
 public:
     Mapa(GestorRecursos* gestor);
+    void initMapa();  // Método de inicialización para cargar imágenes
     void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
         const std::string& nombre2, const std::string& ruta2,
         const std::string& nombre3, const std::string& ruta3);
-    void renderizar();
+    void renderizarMapa();
+private:
+    GestorRecursos* gestorRecursos;
+    std::vector<std::string> imagenes;
+    int indiceActual;
 };

@@ -5,7 +5,20 @@
 
 // Constructor
 Mapa::Mapa(GestorRecursos* gestor)
-    : gestorRecursos(gestor), indiceActual(2) {}
+    : gestorRecursos(gestor), indiceActual(0) {}
+
+void Mapa::initMapa() {
+    // Si las imágenes ya están cargadas, no las recargues
+    if (imagenes.empty()) {
+        cargarImagenes(
+            "MapaNivel1", "Imagenes/Mapa/TecMapN1.png",
+            "MapaNivel2", "Imagenes/Mapa/TecMapN2.png",
+            "MapaNivel3", "Imagenes/Mapa/TecMapN3.png");
+    }
+    imagenes.push_back("MapaNivel1");
+    imagenes.push_back("MapaNivel2");
+    imagenes.push_back("MapaNivel3");
+}
 
 // Método para cargar las dos imágenes
 void Mapa::cargarImagenes(const std::string& nombre1, const std::string& ruta1,
@@ -20,18 +33,24 @@ void Mapa::cargarImagenes(const std::string& nombre1, const std::string& ruta1,
 }
 
 // Método para renderizar la imagen actual
-void Mapa::renderizar() {
+void Mapa::renderizarMapa() {
+    // Limpia la pantalla con el color de fondo
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Fondo negro
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Establece el color blanco para evitar modificar la textura
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
     GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[indiceActual]);
     if (texturaActual) {
         glBindTexture(GL_TEXTURE_2D, texturaActual);
 
-        glColor3f(0.0f, 1.0f, 0.0f); // Rojo
         // Dibujar un cuadrado con la textura actual
         glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, -300.0f, 0.0f); // Esquina inferior izquierda
-        glTexCoord2f(1.0f, 1.0f); glVertex3f(400.0f, -300.0f, 0.0f);  // Esquina inferior derecha
-        glTexCoord2f(1.0f, 0.0f); glVertex3f(400.0f, 300.0f, 0.0f);   // Esquina superior derecha
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 300.0f, 0.0f);  // Esquina superior izquierda
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f); // Esquina inferior izquierda
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(800.0f, 0.0f, 0.0f);  // Esquina inferior derecha
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);   // Esquina superior derecha
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);  // Esquina superior izquierda
         glEnd();
     }
     else {
