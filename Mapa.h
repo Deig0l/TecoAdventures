@@ -12,6 +12,10 @@ public:
         const std::string& nombre2, const std::string& ruta2,
         const std::string& nombre3, const std::string& ruta3);
     void renderizarMapa();
+    void cambiarIndice(int nuevoIndice);
+    void siguienteIndice();
+    void indiceAnterior();
+    void writeBitmapString(void* font, const char* string);
 private:
     GestorRecursos* gestorRecursos;
     std::vector<std::string> imagenes;

@@ -58,7 +58,7 @@ void inicializarFlechas() {
 
 void crearNivel(int n) {
 	inicializarFlechas();
-	inicializacion();
+	inicializacionNivel();
 	//glutTimerFunc(0, secuenciaNivel1, 0);
 	switch (n)
 	{
@@ -78,13 +78,13 @@ void crearNivel(int n) {
 	default:
 		break;
 	}
-	glutDisplayFunc(mostrar);
+	glutDisplayFunc(mostrarNivel);
 	glutKeyboardFunc(controlesJuego);
 	glutSpecialFunc(controlesEspecial);
 	glutMainLoop();
 }
 
-void inicializacion(void) {
+void inicializacionNivel(void) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowPosition(150, 50);
 	glutInitWindowSize(800, posicionMaxY);
@@ -101,7 +101,7 @@ void writeBitmapString(void* font, const char* string) {
 	}
 }
 
-void mostrar(void) {
+void mostrarNivel(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	escribirPuntuacion();

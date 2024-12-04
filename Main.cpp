@@ -13,6 +13,7 @@ Este programa esta sobre la licencia GPL-3.0
 #include <GL/glut.h>
 #include "Nivel1.h"
 #include "Nivel2.h"
+#include "Nivel3.h"
 #include "GestorDeRecursos.h"
 #include "Inicio.h"
 #include "Mapa.h"
@@ -24,6 +25,7 @@ Inicio* pantallaInicio; // Instancia de la clase Inicio para alternar imágenes
 Mapa* pantallaMapa; //Instancia de clase Mapa para mostrar avance de juego
 Nivel1* pantallaNivel1;
 Nivel2* pantallaNivel2;
+Nivel3* pantallaNivel3;
 
 // Variables Globales
 int nivelActual = -1;
@@ -47,13 +49,16 @@ void showInicio();
 void showMapa();
 void showN1();
 void showN2();
+void showN3();
 void tecladoNoEspecial(unsigned char key, int x, int y);
 void finalizar();
 void enterTecleado();
 void unoTecleado();
 void dosTecleado();
+void tresTecleado();
 void emeTecleado();
 void masTecleado();
+void menosTecleado();
 
 int main(int argc, char** argv) {
 
@@ -63,7 +68,7 @@ int main(int argc, char** argv) {
     glutCreateWindow("Teco's Adventures");
 
     inicializacion();
-    glutIdleFunc(mostrar);//permite que imagenes que alternan se muestren
+    //glutIdleFunc(mostrar);//permite que imagenes que alternan se muestren
     glutDisplayFunc(mostrar);
     glutKeyboardFunc(tecladoNoEspecial);
 
@@ -103,6 +108,9 @@ void mostrar() {
     case 2:
         showN2();
         break;
+    case 3:
+        showN3();
+        break;
     default:
         break;
     }
@@ -111,6 +119,7 @@ void mostrar() {
 
 void showInicio() {
     if (mostrarInicio) { // Mostrar pantalla de inicio
+        glutIdleFunc(mostrar);
         pantallaInicio->alternarImagen();
         pantallaInicio->renderizar();
     }
@@ -134,6 +143,10 @@ void showN2() {
     pantallaNivel2->renderizarNivel2();
 }
 
+void showN3() {
+    pantallaNivel3->renderizarNivel3();
+}
+
 void tecladoNoEspecial(unsigned char key, int x, int y) {
     switch (key) {
     case 27: //ESC
@@ -148,11 +161,17 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
     case '2':
         dosTecleado();
         break;
+    case '3':
+        tresTecleado();
+        break;
     case 'm': // De menú
         emeTecleado();
         break;
     case '+':
         masTecleado();
+        break;
+    case '-':
+        menosTecleado();
         break;
     default:
         break;
@@ -172,9 +191,11 @@ void finalizar() {
 
 void enterTecleado() {
     printf("Tecla ENTER presionada\n");
-    if (nivelActual > 0) { // Todos los niveles
-        printf("Estamos en Mapa o niveles: %d\n", nivelActual);
+    if (nivelActual == 0) { // Estamos en mapa
+        printf("Estamos en Mapa: %d\n", nivelActual);
         printf("Se entro al IF, nivel actual: %d\n", nivelActual);
+
+
     }
     else { // Mapa o inicio
         if (nivelActual == -1) {//Si esta en inicio cambiar a mapa
@@ -208,7 +229,16 @@ void dosTecleado() {
         pantallaNivel2 = new Nivel2(&gestorRecursos);
         pantallaNivel2->initNivel2();
     }
-    //initNivel1(); // Configura el nivel 1
+}
+
+void tresTecleado() {
+    nivelActual = 3;
+    mostrarInicio = false; // Sal de la pantalla blanca
+    printf("Tecla 3 presionada\n");
+    if (!pantallaNivel3) {
+        pantallaNivel3 = new Nivel3(&gestorRecursos);
+        pantallaNivel3->initNivel3();
+    }
 }
 
 void emeTecleado() {
@@ -220,6 +250,22 @@ void emeTecleado() {
 
 void masTecleado() {
     if (nivelActual == 0) {//si estamos en mapa
-        
+        pantallaMapa->siguienteIndice();
+        nivelesDesbloqueados++;
+        if (nivelesDesbloqueados > 3) {
+            nivelesDesbloqueados = 1;
+        }
+        printf("El nivel seleccionado es: %d\n", nivelesDesbloqueados);
+    }
+}
+
+void menosTecleado() {
+    if (nivelActual == 0) {//si estamos en mapa
+        pantallaMapa->indiceAnterior();
+        nivelesDesbloqueados--;
+        if (nivelesDesbloqueados < 1) {
+            nivelesDesbloqueados = 3;
+        }
+        printf("El nivel seleccionado es: %d\n", nivelesDesbloqueados);
     }
 }

@@ -32,10 +32,9 @@ void agregarFlechaLF(int n);
 void agregarFlechaUP(int n);
 void agregarFlechaDW(int n);
 void agregarFlechaRT(int n);
-void finishGame(int);
+void finishLevel(int);
 void idle();
 void controlesJuego(unsigned char key, int x, int y);
 void controlesEspecial(int key, int x, int y);
 
 #endif
-

@@ -30,7 +30,7 @@ void secuenciaNivel1(int) {
 	glutTimerFunc(14000, agregarFlechaRT, 4);
 
 	//Finish game
-	glutTimerFunc(22000, finishGame, 0);
+	//glutTimerFunc(22000, finishGame, 0);
 }
 
 void secuenciaNivel2(int) {
@@ -56,7 +56,7 @@ void secuenciaNivel2(int) {
 	glutTimerFunc(21500, agregarFlechaDW, 9);
 
 	//Finish game
-	glutTimerFunc(25500, finishGame, 0);
+	//glutTimerFunc(25500, finishGame, 0);
 }
 
 void secuenciaNivel3(int) {
@@ -82,5 +82,5 @@ void secuenciaNivel3(int) {
 	glutTimerFunc(14500, agregarFlechaRT, 4);
 
 	//Finish game
-	glutTimerFunc(19500, finishGame, 0);
+	//glutTimerFunc(19500, finishGame, 0);
 }
