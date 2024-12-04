@@ -16,6 +16,7 @@ Este programa esta sobre la licencia GPL-3.0
 #include "GestorDeRecursos.h"
 #include "Inicio.h"
 #include "Mapa.h"
+#include <Windows.h>
 
 // Instancias globales
 GestorRecursos gestorRecursos;
@@ -82,6 +83,7 @@ void inicializacion() {
     // Inicializar pantalla de inicio y cargar imágenes
     pantallaInicio = new Inicio(&gestorRecursos, 200); // Cambiar cada 500 ms
     pantallaInicio->cargarImagenes("inicio1", "Imagenes/Inicio/inicio1.png", "inicio2", "Imagenes/Inicio/inicio2.png");
+
 }
 
 void mostrar() {
