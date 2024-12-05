@@ -43,7 +43,7 @@ void controlesEspecial(int key, int x, int y);
 void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
     const std::string& nombre2, const std::string& ruta2,
     const std::string& nombre3, const std::string& ruta3);
-void renderizarMapa();
+void mostrarFondo(int niveles);
 
 bool checkScore();
 

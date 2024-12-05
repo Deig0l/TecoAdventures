@@ -1,5 +1,9 @@
 #include "Nivel.h"
 
+std::vector<std::string> imagenes;
+GestorRecursos gestor;
+GestorRecursos* gestorRecursos = &gestor;
+
 float LFx = 30;
 float UPx = 130;
 float DWx = 230;
@@ -79,6 +83,12 @@ void crearNivel(int n) {
 	default:
 		break;
 	}
+	cargarImagenes(
+		"FondoN1", "Imagenes/Niveles/BGN1.png",
+		"FondoN2", "Imagenes/Niveles/BGN2.png",
+		"FondoN3", "Imagenes/Niveles/BGN3.png"
+	);
+	mostrarFondo(n);
 	mostrarNivel();
 	/*glutDisplayFunc(mostrarNivel);
 	glutKeyboardFunc(controlesJuego);
@@ -94,13 +104,6 @@ void inicializacionNivel(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0.0, 800.0, 0.0, posicionMaxY);
-
-	cargarImagenes(
-		"FondoN1", "Imagenes/Niveles/BGN1.png",
-		"Fondo2", "Imagenes/Niveles/BGN2.png",
-		"Fondo3", "Imagenes/Niveles/BGN3.png"
-	);
-
 }
 
 void writeBitmapString(void* font, const char* string) {
@@ -124,6 +127,36 @@ void mostrarNivel(void) {
 	dibujarFlechas();
 	glFlush();
 	glutPostRedisplay();
+}
+
+void mostrarFondo(int niveles) {
+	// Verifica que las imágenes estén cargadas y el índice sea válido
+	if (imagenes.empty()) {
+		std::cerr << "Error: No se han cargado imágenes.\n";
+		return;
+	}
+
+	if (niveles < 0 || niveles >= static_cast<int>(imagenes.size())) {
+		std::cerr << "Error: índice fuera de rango al acceder a las imágenes. Niveles: "
+			<< niveles << ", Tamaño del vector: " << imagenes.size() << "\n";
+		return;
+	}
+
+	GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[niveles]);
+	if (texturaActual) {
+		glBindTexture(GL_TEXTURE_2D, texturaActual);
+
+		glColor3f(1.0f, 1.0f, 1.0f); // Color blanco para no alterar la textura
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(800.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);
+		glEnd();
+	}
+	else {
+		std::cerr << "Error: No se pudo obtener la textura actual.\n";
+	}
 }
 
 void escribirPuntuacion() {
@@ -376,31 +409,30 @@ void controlesEspecial(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-std::vector<std::string> imagenes;
-GestorRecursos* gestorRecursos;
+	void cargarImagenes(const std::string & nombre1, const std::string & ruta1,
+		const std::string & nombre2, const std::string & ruta2,
+		const std::string & nombre3, const std::string & ruta3) {
+		gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
+		gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
+		gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
 
-void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
-	const std::string& nombre2, const std::string& ruta2,
-	const std::string& nombre3, const std::string& ruta3) {
-
-	gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
-	gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
-	gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
-	imagenes.push_back(nombre1);
-	imagenes.push_back(nombre2);
-	imagenes.push_back(nombre3);
-}
-
-
-void renderizarMapa(){
-	
-}
-
-bool checkScore() {
-	if (score >= 160) {
-		return true;
+		// Agregar imágenes al vector en lugar de sobrescribirlo
+		if (std::find(imagenes.begin(), imagenes.end(), nombre1) == imagenes.end()) {
+			imagenes.push_back(nombre1);
+		}
+		if (std::find(imagenes.begin(), imagenes.end(), nombre2) == imagenes.end()) {
+			imagenes.push_back(nombre2);
+		}
+		if (std::find(imagenes.begin(), imagenes.end(), nombre3) == imagenes.end()) {
+			imagenes.push_back(nombre3);
+		}
 	}
-	else {
-		return false;
+
+	bool checkScore() {
+		if (score >= 160) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-}
