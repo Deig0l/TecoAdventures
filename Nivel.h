@@ -45,4 +45,6 @@ void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
     const std::string& nombre3, const std::string& ruta3);
 void renderizarMapa();
 
+bool checkScore();
+
 #endif
