@@ -27,7 +27,7 @@ public:
     // Constructor para inicializar la posición y size de la figura
     Flecha(float x, float y, float s);
 
-    // Constructor para inicializar la posición de la figura y color
+    // Constructor para inicializar la posición, size y color de la figura
     Flecha(float x, float y, float s, ListaColores c);
 
     // Destructor virtual

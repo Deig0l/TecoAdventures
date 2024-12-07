@@ -63,15 +63,15 @@ FlechaDOWN::FlechaDOWN(float x, float y, float s, ListaColores c) : Flecha(x, y,
 //	this->y_origen = y_origen++;
 //}
 
-float FlechaDOWN::getY() /*const*/ {
+float FlechaDOWN::getY() {
 	return y_origen;
 }
 
-void FlechaDOWN::setY(float new_y) /*const*/ {
+void FlechaDOWN::setY(float new_y) {
 	this->y_origen = new_y;
 }
 
-void FlechaDOWN::incY(float velocidad) /*const*/ {
+void FlechaDOWN::incY(float velocidad) {
 	this->y_origen += velocidad;
 }
 
@@ -83,7 +83,7 @@ void FlechaDOWN::setMover(bool b) {
 	this->mover = b;
 }
 
-void FlechaDOWN::dibujar() /*const*/ {
+void FlechaDOWN::dibujar() {
 	asignarColor(color);
 	Rectangulo rect(6 * size, 5 * size, (2.5 * size) + x_origen, (6 * size) + y_origen);
 	rect.dibujar();
