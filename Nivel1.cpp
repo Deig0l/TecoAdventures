@@ -34,11 +34,11 @@ void Nivel1::renderizarNivel1() {
     //glEnable(GL_TEXTURE_2D);
 
     // Limpia la pantalla con el color de fondo
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Fondo negro
     glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Fondo negro
 
     // Establece el color blanco para evitar modificar la textura
-    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    glColor3f(1.0f, 1.0f, 1.0f);
 
     GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[indiceActual]);
     if (texturaActual) {

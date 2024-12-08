@@ -27,4 +27,3 @@ void Triangulo::dibujar() const {
     glVertex2f(x_origen + (base / 2), y_origen + altura); // Vértice superior
     glEnd();
 }
-

@@ -32,7 +32,10 @@ void Inicio::renderizar() {
     if (texturaActual) {
         glBindTexture(GL_TEXTURE_2D, texturaActual);
 
-        glColor3f(1.0f, 0.0f, 0.0f); // Rojo
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(1.0f,1.0f,1.0f,1.0);
+        //glColor3f(1.0f, 0.0f, 0.0f); // Rojo
+        //glColor3f(1.0f, 1.0f, 1.0f); // Blanco
         // Dibujar un cuadrado con la textura actual
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f); // Esquina inferior izquierda

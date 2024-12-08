@@ -140,6 +140,7 @@ void showMapa() {
 }
 
 void showN1() {
+    //pantallaNivel1->renderizarNivel1();
     crearNivel(1);
     //pantallaNivel1->renderizarNivel1();
     //renderizarNivel1();

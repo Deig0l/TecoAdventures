@@ -10,4 +10,3 @@ void secuenciaNivel2(int);
 void secuenciaNivel3(int);
 
 #endif
-
