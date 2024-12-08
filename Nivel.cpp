@@ -61,39 +61,28 @@ void inicializarFlechas() {
 }
 
 void crearNivel(int n) {
-	//inicializarFlechas();
-	//inicializacionNivel();
-	//glutTimerFunc(0, secuenciaNivel1, 0);
 	switch (n)
 	{
 	case 1:
-		//velocidad = 0.1;
 		velocidad = 0.1;
-		/*glutTimerFunc(0, secuenciaNivel1, 0);*/
-		//glutTimerFunc(21500, finishLevel, 0);
 		break;
 	case 2:
 		velocidad = 0.2;
-		//glutTimerFunc(0, secuenciaNivel2, 0);
 		break;
 	case 3:
 		velocidad = 0.3;
-		/*glutTimerFunc(0, secuenciaNivel3, 0);*/
 		break;
 	default:
 		break;
 	}
+
 	cargarImagenes(
 		"FondoN1", "Imagenes/Niveles/BGN1.png",
 		"FondoN2", "Imagenes/Niveles/BGN2.png",
 		"FondoN3", "Imagenes/Niveles/BGN3.png"
 	);
-	mostrarFondo(n);
+	mostrarFondo(n - 1);
 	mostrarNivel();
-	/*glutDisplayFunc(mostrarNivel);
-	glutKeyboardFunc(controlesJuego);
-	glutSpecialFunc(controlesEspecial);
-	glutMainLoop();*/
 }
 
 void inicializacionNivel(void) {
@@ -114,7 +103,7 @@ void writeBitmapString(void* font, const char* string) {
 }
 
 void mostrarNivel(void) {
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 
 	escribirPuntuacion();
 
@@ -125,7 +114,7 @@ void mostrarNivel(void) {
 	fRTSilueta.dibujar();
 
 	dibujarFlechas();
-	glFlush();
+	//glFlush();
 	glutPostRedisplay();
 }
 
@@ -156,25 +145,6 @@ void mostrarFondo(int niveles) {
 	}
 	else {
 		std::cerr << "Error: No se pudo obtener la textura actual.\n";
-	}
-}
-
-void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
-	const std::string& nombre2, const std::string& ruta2,
-	const std::string& nombre3, const std::string& ruta3) {
-	gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
-	gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
-	gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
-
-	// Agregar imágenes al vector en lugar de sobrescribirlo
-	if (std::find(imagenes.begin(), imagenes.end(), nombre1) == imagenes.end()) {
-		imagenes.push_back(nombre1);
-	}
-	if (std::find(imagenes.begin(), imagenes.end(), nombre2) == imagenes.end()) {
-		imagenes.push_back(nombre2);
-	}
-	if (std::find(imagenes.begin(), imagenes.end(), nombre3) == imagenes.end()) {
-		imagenes.push_back(nombre3);
 	}
 }
 
@@ -272,6 +242,8 @@ void dibujarFlechas() {
 			}
 		}
 	}
+	glEnable(GL_TEXTURE_2D); // Desactiva texturas
+	glEnable(GL_BLEND);      // Desactiva blending si estaba habilitado
 }
 
 void obtenerPuntos(float y) {
