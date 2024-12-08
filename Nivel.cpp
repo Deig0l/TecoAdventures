@@ -429,3 +429,31 @@ void controlesEspecial(int key, int x, int y) {
 	}
 	glutPostRedisplay();
 }
+
+	void cargarImagenes(const std::string & nombre1, const std::string & ruta1,
+		const std::string & nombre2, const std::string & ruta2,
+		const std::string & nombre3, const std::string & ruta3) {
+		gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
+		gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
+		gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
+
+		// Agregar imágenes al vector en lugar de sobrescribirlo
+		if (std::find(imagenes.begin(), imagenes.end(), nombre1) == imagenes.end()) {
+			imagenes.push_back(nombre1);
+		}
+		if (std::find(imagenes.begin(), imagenes.end(), nombre2) == imagenes.end()) {
+			imagenes.push_back(nombre2);
+		}
+		if (std::find(imagenes.begin(), imagenes.end(), nombre3) == imagenes.end()) {
+			imagenes.push_back(nombre3);
+		}
+	}
+
+	bool checkScore() {
+		if (score >= 160) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
