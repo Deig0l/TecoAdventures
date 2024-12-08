@@ -43,6 +43,8 @@ void Mapa::renderizarMapa() {
 
     GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[indiceActual]);
     if (texturaActual) {
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
         glBindTexture(GL_TEXTURE_2D, texturaActual);
 
         // Dibujar un cuadrado con la textura actual
@@ -52,14 +54,12 @@ void Mapa::renderizarMapa() {
         glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);   // Esquina superior derecha
         glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);  // Esquina superior izquierda
 
-        glDisable(GL_TEXTURE_2D);
-        glDisable(GL_BLEND);
         glColor3f(1.0,0.0,0.0);
         glRasterPos2f(450,100);
         std::string mensaje = "Nivel seleccionado: " + std::to_string(indiceActual);
         writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, mensaje.c_str());
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+        glDisable(GL_BLEND);
         glEnd();
     }
     else {

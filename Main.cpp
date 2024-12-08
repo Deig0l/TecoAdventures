@@ -34,8 +34,6 @@ nivelActual = 1 --> Nivel 1
 nivelActual = 2 --> Nivel 2
 nivelActual = 3 --> Nivel 3
 
-**Niveles 2 y 3 estan en opcional, todavia no se sabe si
-se realizaran
 */
 
 void inicializacion();

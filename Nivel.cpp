@@ -63,11 +63,30 @@ void inicializacionNivel(void) {
 
 void inicializarFlechas() {
 	for (int i = 0; i < numFlechas; ++i) {
-		fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
-		fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
-		fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
-		fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
-	}
+        fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
+        fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
+        fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
+        fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
+
+        fLFArray[i].setMover(false); // Reinicia estado de movimiento
+        fUPArray[i].setMover(false);
+        fDWArray[i].setMover(false);
+        fRTArray[i].setMover(false);
+    }
+
+    // Reinicia los índices de las flechas
+    topLF = 0;
+    topUP = 0;
+    topDW = 0;
+    topRT = 0;
+
+    // Activa las primeras flechas si es necesario
+    if (numFlechas > 0) {
+		agregarFlechaLF(numFlechas);
+		agregarFlechaDW(numFlechas);
+		agregarFlechaUP(numFlechas);
+		agregarFlechaRT(numFlechas);
+    }
 }
 
 void crearNivel(int n) {
@@ -92,6 +111,9 @@ void crearNivel(int n) {
 		"FondoN3", "Imagenes/Niveles/BGN3.png"
 	);
 	mostrarFondo(n - 1);
+
+	//inicializarFlechas();
+
 	mostrarNivel();
 }
 
