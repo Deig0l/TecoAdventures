@@ -16,6 +16,7 @@ float posicionOrigenY = -88.0;
 float posicionMaxY = 640.0;
 float velocidad = 0.2;
 
+int callingLevel = -1;
 int score = 0;
 
 float metaY = 500;
@@ -28,6 +29,7 @@ float t5 = 72;
 float t6 = 87;
 
 bool win = false;
+bool scoreReset = false;
 
 float N1win = 140.0;
 
@@ -93,6 +95,11 @@ void inicializarFlechas() {
 
 
 void crearNivel(int n) {
+	if (callingLevel != n) {
+		scoreReset = true;
+		callingLevel = n;
+	}
+
 	switch (n)
 	{
 	case 1:
@@ -118,9 +125,13 @@ void crearNivel(int n) {
 }
 
 void mostrarNivel(void) {
+	
+	if (scoreReset) {
+		score = 0;
+		scoreReset = false;
+	}
 
 	//Verificar si se cambio desde otro nivel
-
 	escribirPuntuacion();
 
 	// Siluetas grises
@@ -376,12 +387,6 @@ void escribirPuntuacion() {
 }
 
 bool checkScore() {
-	//if (score >= 160) {
-	//	return true;
-	//}
-	//else {
-	//	return false;
-	//}
 	return (score >= 160);
 }
 
