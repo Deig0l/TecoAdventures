@@ -135,9 +135,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Nivel.cpp" />
-    <ClCompile Include="Nivel1.cpp" />
-    <ClCompile Include="Nivel2.cpp" />
-    <ClCompile Include="Nivel3.cpp" />
     <ClCompile Include="Secuencia.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +145,6 @@
     <ClInclude Include="Inicio.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Nivel.h" />
-    <ClInclude Include="Nivel1.h" />
-    <ClInclude Include="Nivel2.h" />
-    <ClInclude Include="Nivel3.h" />
     <ClInclude Include="Secuencia.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

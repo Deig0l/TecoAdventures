@@ -30,19 +30,23 @@ void Inicio::alternarImagen() {
 void Inicio::renderizar() {
     GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[indiceActual]);
     if (texturaActual) {
+        glClear(GL_COLOR_BUFFER_BIT);          // Limpia el buffer de color
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  // Fondo blanco
+
+        glEnable(GL_TEXTURE_2D);               // Habilita texturas
         glBindTexture(GL_TEXTURE_2D, texturaActual);
 
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(1.0f,1.0f,1.0f,1.0);
-        //glColor3f(1.0f, 0.0f, 0.0f); // Rojo
-        //glColor3f(1.0f, 1.0f, 1.0f); // Blanco
-        // Dibujar un cuadrado con la textura actual
-        glBegin(GL_QUADS);
+        glDisable(GL_BLEND);                   // Asegúrate de deshabilitar blending
+        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);     // Color blanco para no alterar la textura
+
+        glBegin(GL_QUADS);                     // Dibuja el cuadrado con la textura
         glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f); // Esquina inferior izquierda
         glTexCoord2f(1.0f, 1.0f); glVertex3f(800.0f, 0.0f, 0.0f);  // Esquina inferior derecha
         glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);   // Esquina superior derecha
         glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);  // Esquina superior izquierda
         glEnd();
+
+        glDisable(GL_TEXTURE_2D);              // Deshabilita texturas para limpiar el estado
     }
     else {
         std::cerr << "Error: No se pudo obtener la textura actual para renderizar." << std::endl;

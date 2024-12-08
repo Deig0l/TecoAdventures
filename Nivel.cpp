@@ -51,51 +51,6 @@ FlechaUP fUPArray[10];
 FlechaDOWN fDWArray[10];
 FlechaRIGHT fRTArray[10];
 
-void inicializarFlechas() {
-	for (int i = 0; i < numFlechas; ++i) {
-		fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
-		fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
-		fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
-		fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
-	}
-}
-
-void crearNivel(int n) {
-	//inicializarFlechas();
-	//inicializacionNivel();
-	//glutTimerFunc(0, secuenciaNivel1, 0);
-	switch (n)
-	{
-	case 1:
-		//velocidad = 0.1;
-		velocidad = 0.1;
-		/*glutTimerFunc(0, secuenciaNivel1, 0);*/
-		//glutTimerFunc(21500, finishLevel, 0);
-		break;
-	case 2:
-		velocidad = 0.2;
-		//glutTimerFunc(0, secuenciaNivel2, 0);
-		break;
-	case 3:
-		velocidad = 0.3;
-		/*glutTimerFunc(0, secuenciaNivel3, 0);*/
-		break;
-	default:
-		break;
-	}
-	cargarImagenes(
-		"FondoN1", "Imagenes/Niveles/BGN1.png",
-		"FondoN2", "Imagenes/Niveles/BGN2.png",
-		"FondoN3", "Imagenes/Niveles/BGN3.png"
-	);
-	mostrarFondo(n);
-	mostrarNivel();
-	/*glutDisplayFunc(mostrarNivel);
-	glutKeyboardFunc(controlesJuego);
-	glutSpecialFunc(controlesEspecial);
-	glutMainLoop();*/
-}
-
 void inicializacionNivel(void) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowPosition(150, 50);
@@ -106,6 +61,40 @@ void inicializacionNivel(void) {
 	gluOrtho2D(0.0, 800.0, 0.0, posicionMaxY);
 }
 
+void inicializarFlechas() {
+	for (int i = 0; i < numFlechas; ++i) {
+		fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
+		fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
+		fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
+		fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
+	}
+}
+
+void crearNivel(int n) {
+	switch (n)
+	{
+	case 1:
+		velocidad = 0.1;
+		break;
+	case 2:
+		velocidad = 0.2;
+		break;
+	case 3:
+		velocidad = 0.3;
+		break;
+	default:
+		break;
+	}
+
+	cargarImagenes(
+		"FondoN1", "Imagenes/Niveles/BGN1.png",
+		"FondoN2", "Imagenes/Niveles/BGN2.png",
+		"FondoN3", "Imagenes/Niveles/BGN3.png"
+	);
+	mostrarFondo(n - 1);
+	mostrarNivel();
+}
+
 void writeBitmapString(void* font, const char* string) {
 	const char* c;
 	for (c = string; *c != '\0'; c++) {
@@ -114,7 +103,7 @@ void writeBitmapString(void* font, const char* string) {
 }
 
 void mostrarNivel(void) {
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 
 	escribirPuntuacion();
 
@@ -125,7 +114,7 @@ void mostrarNivel(void) {
 	fRTSilueta.dibujar();
 
 	dibujarFlechas();
-	glFlush();
+	//glFlush();
 	glutPostRedisplay();
 }
 
@@ -159,31 +148,13 @@ void mostrarFondo(int niveles) {
 	}
 }
 
-void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
-	const std::string& nombre2, const std::string& ruta2,
-	const std::string& nombre3, const std::string& ruta3) {
-	gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
-	gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
-	gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
-
-	// Agregar imágenes al vector en lugar de sobrescribirlo
-	if (std::find(imagenes.begin(), imagenes.end(), nombre1) == imagenes.end()) {
-		imagenes.push_back(nombre1);
-	}
-	if (std::find(imagenes.begin(), imagenes.end(), nombre2) == imagenes.end()) {
-		imagenes.push_back(nombre2);
-	}
-	if (std::find(imagenes.begin(), imagenes.end(), nombre3) == imagenes.end()) {
-		imagenes.push_back(nombre3);
-	}
-}
-
 void escribirPuntuacion() {
-	glColor3f(1.0, 1.0, 1.0);
+	glColor3f(1.0, 1.0, 0.0);
 	glRasterPos2f(500.0, 550.0);
 	string str_score = to_string(score);
 	writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, ("SCORE: " + str_score).c_str());
 }
+
 
 void dibujarFlechas() {
 	glDisable(GL_TEXTURE_2D); // Desactiva texturas
@@ -272,6 +243,8 @@ void dibujarFlechas() {
 			}
 		}
 	}
+	glEnable(GL_TEXTURE_2D); // Desactiva texturas
+	glEnable(GL_BLEND);      // Desactiva blending si estaba habilitado
 }
 
 void obtenerPuntos(float y) {
