@@ -18,7 +18,6 @@ float velocidad = 0.2;
 
 int score = 0;
 
-
 float metaY = 500;
 
 float t1 = 6;
@@ -92,6 +91,7 @@ void inicializarFlechas() {
 	}
 }
 
+
 void crearNivel(int n) {
 	switch (n)
 	{
@@ -114,15 +114,12 @@ void crearNivel(int n) {
 		"FondoN3", "Imagenes/Niveles/BGN3.png"
 	);
 	mostrarFondo(n - 1);
-
-	//inicializarFlechas();
-
 	mostrarNivel();
 }
 
-
 void mostrarNivel(void) {
-	//glClear(GL_COLOR_BUFFER_BIT);
+
+	//Verificar si se cambio desde otro nivel
 
 	escribirPuntuacion();
 
@@ -364,7 +361,8 @@ void writeBitmapString(void* font, const char* string) {
 }
 
 void escribirPuntuacion() {
-	//La deshabilitacion y habiliation de Etxturas y blend es para que el color sea el correcto
+
+	//La deshabilitacion y habiliation de texturas y blend es para que el color sea el correcto
 	glDisable(GL_TEXTURE_2D); // Activa texturas
 	glDisable(GL_BLEND);      // Activa blending
 
@@ -471,6 +469,3 @@ void mostrarFondo(int niveles) {
 	}
 }
 
-//Esto para que?
-void idle() {
-}
