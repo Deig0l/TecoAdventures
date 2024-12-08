@@ -11,9 +11,6 @@ Este programa esta sobre la licencia GPL-3.0
 #include <iostream>
 #include <vector>
 #include <GL/glut.h>
-#include "Nivel1.h"
-#include "Nivel2.h"
-#include "Nivel3.h"
 #include "GestorDeRecursos.h"
 #include "Inicio.h"
 #include "Mapa.h"
@@ -24,9 +21,6 @@ Este programa esta sobre la licencia GPL-3.0
 GestorRecursos gestorRecursos;
 Inicio* pantallaInicio; // Instancia de la clase Inicio para alternar imágenes
 Mapa* pantallaMapa; //Instancia de clase Mapa para mostrar avance de juego
-Nivel1* pantallaNivel1;
-Nivel2* pantallaNivel2;
-Nivel3* pantallaNivel3;
 
 // Variables Globales
 int nivelActual = -1;
@@ -235,10 +229,6 @@ void unoTecleado() {
     nivelActual = 1;
     mostrarInicio = false; // Sal de la pantalla blanca
     printf("Tecla 1 presionada\n");
-    if (!pantallaNivel1) {
-        pantallaNivel1 = new Nivel1(&gestorRecursos);
-        pantallaNivel1->initNivel1();
-    }
     //initNivel1(); // Configura el nivel 1
 }
 
@@ -246,20 +236,12 @@ void dosTecleado() {
     nivelActual = 2;
     mostrarInicio = false; // Sal de la pantalla blanca
     printf("Tecla 2 presionada\n");
-    if (!pantallaNivel2) {
-        pantallaNivel2 = new Nivel2(&gestorRecursos);
-        pantallaNivel2->initNivel2();
-    }
 }
 
 void tresTecleado() {
     nivelActual = 3;
     mostrarInicio = false; // Sal de la pantalla blanca
     printf("Tecla 3 presionada\n");
-    if (!pantallaNivel3) {
-        pantallaNivel3 = new Nivel3(&gestorRecursos);
-        pantallaNivel3->initNivel3();
-    }
 }
 
 void emeTecleado() {
