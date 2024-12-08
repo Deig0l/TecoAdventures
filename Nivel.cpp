@@ -4,17 +4,20 @@ std::vector<std::string> imagenes;
 GestorRecursos gestor;
 GestorRecursos* gestorRecursos = &gestor;
 
+//Posicion en eje x donde se grafican las flechas
 float LFx = 30;
 float UPx = 130;
 float DWx = 230;
 float RTx = 330;
 
+//Variables globales
 int numFlechas = 10;
 float posicionOrigenY = -88.0;
 float posicionMaxY = 640.0;
 float velocidad = 0.2;
 
 int score = 0;
+
 
 float metaY = 500;
 
@@ -63,30 +66,30 @@ void inicializacionNivel(void) {
 
 void inicializarFlechas() {
 	for (int i = 0; i < numFlechas; ++i) {
-        fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
-        fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
-        fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
-        fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
+		fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
+		fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
+		fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
+		fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
 
-        fLFArray[i].setMover(false); // Reinicia estado de movimiento
-        fUPArray[i].setMover(false);
-        fDWArray[i].setMover(false);
-        fRTArray[i].setMover(false);
-    }
+		fLFArray[i].setMover(false); // Reinicia estado de movimiento
+		fUPArray[i].setMover(false);
+		fDWArray[i].setMover(false);
+		fRTArray[i].setMover(false);
+	}
 
-    // Reinicia los índices de las flechas
-    topLF = 0;
-    topUP = 0;
-    topDW = 0;
-    topRT = 0;
+	// Reinicia los índices de las flechas
+	topLF = 0;
+	topUP = 0;
+	topDW = 0;
+	topRT = 0;
 
-    // Activa las primeras flechas si es necesario
-    if (numFlechas > 0) {
+	// Activa las primeras flechas si es necesario
+	if (numFlechas > 0) {
 		agregarFlechaLF(numFlechas);
 		agregarFlechaDW(numFlechas);
 		agregarFlechaUP(numFlechas);
 		agregarFlechaRT(numFlechas);
-    }
+	}
 }
 
 void crearNivel(int n) {
@@ -117,12 +120,6 @@ void crearNivel(int n) {
 	mostrarNivel();
 }
 
-void writeBitmapString(void* font, const char* string) {
-	const char* c;
-	for (c = string; *c != '\0'; c++) {
-		glutBitmapCharacter(font, *c);
-	}
-}
 
 void mostrarNivel(void) {
 	//glClear(GL_COLOR_BUFFER_BIT);
@@ -139,44 +136,6 @@ void mostrarNivel(void) {
 	//glFlush();
 	glutPostRedisplay();
 }
-
-void mostrarFondo(int niveles) {
-	// Verifica que las imágenes estén cargadas y el índice sea válido
-	if (imagenes.empty()) {
-		std::cerr << "Error: No se han cargado imágenes.\n";
-		return;
-	}
-
-	if (niveles < 0 || niveles >= static_cast<int>(imagenes.size())) {
-		std::cerr << "Error: índice fuera de rango al acceder a las imágenes. Niveles: "
-			<< niveles << ", Tamaño del vector: " << imagenes.size() << "\n";
-		return;
-	}
-
-	GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[niveles]);
-	if (texturaActual) {
-		glBindTexture(GL_TEXTURE_2D, texturaActual);
-
-		glColor3f(1.0f, 1.0f, 1.0f); // Color blanco para no alterar la textura
-		glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f);
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(800.0f, 0.0f, 0.0f);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);
-		glEnd();
-	}
-	else {
-		std::cerr << "Error: No se pudo obtener la textura actual.\n";
-	}
-}
-
-void escribirPuntuacion() {
-	glColor3f(1.0, 1.0, 0.0);
-	glRasterPos2f(500.0, 550.0);
-	string str_score = to_string(score);
-	writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, ("SCORE: " + str_score).c_str());
-}
-
 
 void dibujarFlechas() {
 	glDisable(GL_TEXTURE_2D); // Desactiva texturas
@@ -265,8 +224,9 @@ void dibujarFlechas() {
 			}
 		}
 	}
-	glEnable(GL_TEXTURE_2D); // Desactiva texturas
-	glEnable(GL_BLEND);      // Desactiva blending si estaba habilitado
+	//Esto nos sirve para que se visualizen las flechas sobre la textura de fondo
+	glEnable(GL_TEXTURE_2D); // Activa texturas
+	glEnable(GL_BLEND);      // Activa blending
 }
 
 void obtenerPuntos(float y) {
@@ -390,12 +350,46 @@ void agregarFlechaRT(int n) {
 void finishLevel(int) {
 	/*MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
 	exit(0);*/
-	
+
 }
 
-void idle() {
+/*
+SCORE
+*/
+void writeBitmapString(void* font, const char* string) {
+	const char* c;
+	for (c = string; *c != '\0'; c++) {
+		glutBitmapCharacter(font, *c);
+	}
 }
 
+void escribirPuntuacion() {
+	//La deshabilitacion y habiliation de Etxturas y blend es para que el color sea el correcto
+	glDisable(GL_TEXTURE_2D); // Activa texturas
+	glDisable(GL_BLEND);      // Activa blending
+
+	glColor3f(1.0, 1.0, 0.0);
+	glRasterPos2f(500.0, 550.0);
+	string str_score = to_string(score);
+	writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, ("SCORE: " + str_score).c_str());
+
+	glEnable(GL_TEXTURE_2D); // Activa texturas
+	glEnable(GL_BLEND);      // Activa blending
+}
+
+bool checkScore() {
+	//if (score >= 160) {
+	//	return true;
+	//}
+	//else {
+	//	return false;
+	//}
+	return (score >= 160);
+}
+
+/*
+CONTROLES
+*/
 void controlesJuego(unsigned char key, int x, int y) {
 	switch (key) {
 	case 27: //Esc
@@ -425,30 +419,58 @@ void controlesEspecial(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-	void cargarImagenes(const std::string & nombre1, const std::string & ruta1,
-		const std::string & nombre2, const std::string & ruta2,
-		const std::string & nombre3, const std::string & ruta3) {
-		gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
-		gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
-		gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
+/*
+IMAGENES Y FONDO
+*/
+void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
+	const std::string& nombre2, const std::string& ruta2,
+	const std::string& nombre3, const std::string& ruta3) {
+	gestorRecursos->cargarTextura(nombre1, ruta1.c_str());
+	gestorRecursos->cargarTextura(nombre2, ruta2.c_str());
+	gestorRecursos->cargarTextura(nombre3, ruta3.c_str());
 
-		// Agregar imágenes al vector en lugar de sobrescribirlo
-		if (std::find(imagenes.begin(), imagenes.end(), nombre1) == imagenes.end()) {
-			imagenes.push_back(nombre1);
-		}
-		if (std::find(imagenes.begin(), imagenes.end(), nombre2) == imagenes.end()) {
-			imagenes.push_back(nombre2);
-		}
-		if (std::find(imagenes.begin(), imagenes.end(), nombre3) == imagenes.end()) {
-			imagenes.push_back(nombre3);
-		}
+	// Agregar imágenes al vector en lugar de sobrescribirlo
+	if (std::find(imagenes.begin(), imagenes.end(), nombre1) == imagenes.end()) {
+		imagenes.push_back(nombre1);
+	}
+	if (std::find(imagenes.begin(), imagenes.end(), nombre2) == imagenes.end()) {
+		imagenes.push_back(nombre2);
+	}
+	if (std::find(imagenes.begin(), imagenes.end(), nombre3) == imagenes.end()) {
+		imagenes.push_back(nombre3);
+	}
+}
+
+void mostrarFondo(int niveles) {
+	// Verifica que las imágenes estén cargadas y el índice sea válido
+	if (imagenes.empty()) {
+		std::cerr << "Error: No se han cargado imágenes.\n";
+		return;
 	}
 
-	bool checkScore() {
-		if (score >= 160) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	if (niveles < 0 || niveles >= static_cast<int>(imagenes.size())) {
+		std::cerr << "Error: índice fuera de rango al acceder a las imágenes. Niveles: "
+			<< niveles << ", Tamaño del vector: " << imagenes.size() << "\n";
+		return;
 	}
+
+	GLuint texturaActual = gestorRecursos->obtenerTextura(imagenes[niveles]);
+	if (texturaActual) {
+		glBindTexture(GL_TEXTURE_2D, texturaActual);
+
+		glColor3f(1.0f, 1.0f, 1.0f); // Color blanco para no alterar la textura
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(800.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(800.0f, 640.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 640.0f, 0.0f);
+		glEnd();
+	}
+	else {
+		std::cerr << "Error: No se pudo obtener la textura actual.\n";
+	}
+}
+
+//Esto para que?
+void idle() {
+}
