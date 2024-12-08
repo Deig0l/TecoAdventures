@@ -30,6 +30,7 @@ float t6 = 87;
 
 bool win = false;
 bool scoreReset = false;
+bool flechasInicializadas = false;
 
 float N1win = 140.0;
 
@@ -65,14 +66,90 @@ void inicializacionNivel(void) {
 	gluOrtho2D(0.0, 800.0, 0.0, posicionMaxY);
 }
 
+/*
+NIVELES
+*/
+void crearNivel(int n) {
+	if (callingLevel != n) {
+		callingLevel = n;
+		scoreReset = true;
+		flechasInicializadas = false;
+	}
+
+	if (!flechasInicializadas) {
+		inicializarFlechas(); // Inicializa las flechas una sola vez
+		flechasInicializadas = true;
+
+		// Inicia la secuencia del nivel solo una vez
+		switch (n) {
+		case 1:
+			velocidad = 0.1;
+			glutTimerFunc(0, secuenciaNivel1, 0); // Secuencia del nivel 1
+			break;
+		case 2:
+			velocidad = 0.2;
+			glutTimerFunc(0, secuenciaNivel2, 0); // Secuencia del nivel 2
+			break;
+		case 3:
+			velocidad = 0.3;
+			glutTimerFunc(0, secuenciaNivel3, 0); // Secuencia del nivel 3
+			break;
+		default:
+			break;
+		}
+	}
+
+	// Configuración del fondo y puntuación
+	cargarImagenes(
+		"FondoN1", "Imagenes/Niveles/BGN1.png",
+		"FondoN2", "Imagenes/Niveles/BGN2.png",
+		"FondoN3", "Imagenes/Niveles/BGN3.png"
+	);
+	//mostrarFondo(n - 1);
+}
+
+void mostrarNivel(void) {
+	
+	if (scoreReset) {
+		score = 0;
+		scoreReset = false;
+	}
+
+	// Renderiza el fondo
+	mostrarFondo(callingLevel - 1);
+
+	//Verificar si se cambio desde otro nivel
+	escribirPuntuacion();
+
+	glDisable(GL_TEXTURE_2D); // desactiva texturas
+	glDisable(GL_BLEND);      // desactiva blending
+
+	// Siluetas grises
+	fDWSilueta.dibujar();
+	fUPSilueta.dibujar();
+	fLFSilueta.dibujar();
+	fRTSilueta.dibujar();
+
+	glEnable(GL_TEXTURE_2D); // Activa texturas
+	glEnable(GL_BLEND);      // Activa blending
+
+	dibujarFlechas();
+	glutPostRedisplay();
+}
+
+/*
+FLECHAS
+*/
 void inicializarFlechas() {
 	for (int i = 0; i < numFlechas; ++i) {
+		// Reinicia las flechas a sus posiciones originales
 		fLFArray[i] = FlechaLEFT(LFx, posicionOrigenY, 8, YELLOW);
 		fUPArray[i] = FlechaUP(UPx, posicionOrigenY, 8, BLUE);
 		fDWArray[i] = FlechaDOWN(DWx, posicionOrigenY, 8, RED);
 		fRTArray[i] = FlechaRIGHT(RTx, posicionOrigenY, 8, GREEN);
 
-		fLFArray[i].setMover(false); // Reinicia estado de movimiento
+		// Desactiva todas las flechas inicialmente
+		fLFArray[i].setMover(false);
 		fUPArray[i].setMover(false);
 		fDWArray[i].setMover(false);
 		fRTArray[i].setMover(false);
@@ -84,151 +161,53 @@ void inicializarFlechas() {
 	topDW = 0;
 	topRT = 0;
 
-	// Activa las primeras flechas si es necesario
-	if (numFlechas > 0) {
-		agregarFlechaLF(numFlechas);
-		agregarFlechaDW(numFlechas);
-		agregarFlechaUP(numFlechas);
-		agregarFlechaRT(numFlechas);
-	}
-}
-
-
-void crearNivel(int n) {
-	if (callingLevel != n) {
-		scoreReset = true;
-		callingLevel = n;
-	}
-
-	switch (n)
-	{
-	case 1:
-		velocidad = 0.1;
-		break;
-	case 2:
-		velocidad = 0.2;
-		break;
-	case 3:
-		velocidad = 0.3;
-		break;
-	default:
-		break;
-	}
-
-	cargarImagenes(
-		"FondoN1", "Imagenes/Niveles/BGN1.png",
-		"FondoN2", "Imagenes/Niveles/BGN2.png",
-		"FondoN3", "Imagenes/Niveles/BGN3.png"
-	);
-	mostrarFondo(n - 1);
-	mostrarNivel();
-}
-
-void mostrarNivel(void) {
-	
-	if (scoreReset) {
-		score = 0;
-		scoreReset = false;
-	}
-
-	//Verificar si se cambio desde otro nivel
-	escribirPuntuacion();
-
-	// Siluetas grises
-	fDWSilueta.dibujar();
-	fUPSilueta.dibujar();
-	fLFSilueta.dibujar();
-	fRTSilueta.dibujar();
-
-	dibujarFlechas();
-	//glFlush();
-	glutPostRedisplay();
+	printf("Flechas inicializadas y desactivadas\n");
 }
 
 void dibujarFlechas() {
 	glDisable(GL_TEXTURE_2D); // Desactiva texturas
 	glDisable(GL_BLEND);      // Desactiva blending si estaba habilitado
-	for (int i = 0; i < numFlechas; i++) {
+	for (int i = 0; i < numFlechas; ++i) {
 		if (fLFArray[i].getMover()) {
 			if (fLFArray[i].getY() < posicionMaxY) {
 				fLFArray[i].incY(velocidad);
 				fLFArray[i].dibujar();
 			}
 			else {
-				if (i == topLF) {
-					if (topLF < numFlechas - 1) {
-						topLF++;
-					}
-					else {
-						topLF = 0;
-					}
-				}
-				fLFArray[i].setMover(false);
-				fLFArray[i].setY(posicionOrigenY);
-				printf("Llego al final, topLF: %d\n", topLF);
+				fLFArray[i].setMover(false); // Detenemos flechas al final
 			}
 		}
 	}
-	for (int i = 0; i < numFlechas; i++) {
+	for (int i = 0; i < numFlechas; ++i) {
 		if (fUPArray[i].getMover()) {
 			if (fUPArray[i].getY() < posicionMaxY) {
 				fUPArray[i].incY(velocidad);
 				fUPArray[i].dibujar();
 			}
 			else {
-				if (i == topUP) {
-					if (topUP < numFlechas - 1) {
-						topUP++;
-					}
-					else {
-						topUP = 0;
-					}
-				}
-				fUPArray[i].setMover(false);
-				fUPArray[i].setY(posicionOrigenY);
-				printf("Llego al final, topUP: %d\n", topUP);
+				fUPArray[i].setMover(false); // Detenemos flechas al final
 			}
 		}
 	}
-	for (int i = 0; i < numFlechas; i++) {
+	for (int i = 0; i < numFlechas; ++i) {
 		if (fDWArray[i].getMover()) {
 			if (fDWArray[i].getY() < posicionMaxY) {
 				fDWArray[i].incY(velocidad);
 				fDWArray[i].dibujar();
 			}
 			else {
-				if (i == topDW) {
-					if (topDW < numFlechas - 1) {
-						topDW++;
-					}
-					else {
-						topDW = 0;
-					}
-				}
-				fDWArray[i].setMover(false);
-				fDWArray[i].setY(posicionOrigenY);
-				printf("Llego al final, topDW: %d\n", topDW);
+				fDWArray[i].setMover(false); // Detenemos flechas al final
 			}
 		}
 	}
-	for (int i = 0; i < numFlechas; i++) {
+	for (int i = 0; i < numFlechas; ++i) {
 		if (fRTArray[i].getMover()) {
 			if (fRTArray[i].getY() < posicionMaxY) {
 				fRTArray[i].incY(velocidad);
 				fRTArray[i].dibujar();
 			}
 			else {
-				if (i == topRT) {
-					if (topRT < numFlechas - 1) {
-						topRT++;
-					}
-					else {
-						topRT = 0;
-					}
-				}
-				fRTArray[i].setMover(false);
-				fRTArray[i].setY(posicionOrigenY);
-				printf("Llego al final, topRT: %d\n", topRT);
+				fRTArray[i].setMover(false); // Detenemos flechas al final
 			}
 		}
 	}

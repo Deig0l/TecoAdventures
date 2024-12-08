@@ -24,6 +24,7 @@ void inicializacionNivel(void);
 void writeBitmapString(void* font, const char* string);
 void mostrarNivel(void);
 void escribirPuntuacion();
+void inicializarFlechas();
 void dibujarFlechas();
 void obtenerPuntos(float y);
 void calificarFlechaLF();
