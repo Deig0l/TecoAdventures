@@ -26,6 +26,7 @@ Mapa* pantallaMapa; //Instancia de clase Mapa para mostrar avance de juego
 int nivelActual = -1;
 int nivelesDesbloqueados = 1;
 bool mostrarInicio = true; // Controla si solo se muestra una pantalla en blanco
+bool audioReproduciendo = false;
 /*
 Para cuestiones de debug se proponen que nivelActual sea:
 nivelActual = -1 --> Pantalla de Inicio
@@ -44,9 +45,8 @@ void checkIfWin(int);
 void tecladoNoEspecial(unsigned char key, int x, int y);
 void finalizar();
 void enterTecleado();
-void unoTecleado();
-void dosTecleado();
-void tresTecleado();
+void reproducirAudio(int nivel);
+void numTecleado(int nivel);
 void emeTecleado();
 void masTecleado();
 void menosTecleado();
@@ -98,7 +98,7 @@ void mostrar() {
 		showMapa();
 		break;
 	case 1: // Nivel 1
-		crearNivel(nivelActual);
+		crearNivel(nivelActual);		
 		//showN1();
 		break;
 	case 2: //Nivel 2
@@ -147,16 +147,16 @@ void tecladoNoEspecial(unsigned char key, int x, int y) {
 		enterTecleado();
 		break;
 	case '1':
-		unoTecleado();
+		numTecleado(1);
 		glutTimerFunc(0, secuenciaNivel1, 0);
 		glutTimerFunc(23000, checkIfWin, 0);
 		break;
 	case '2':
-		dosTecleado();
+		numTecleado(2);
 		glutTimerFunc(0, secuenciaNivel2, 0);
 		break;
 	case '3':
-		tresTecleado();
+		numTecleado(3);
 		glutTimerFunc(0, secuenciaNivel3, 0);
 		break;
 	case 'm': // De menú
@@ -205,22 +205,37 @@ void enterTecleado() {
 	}
 }
 
-void unoTecleado() {
-	nivelActual = 1;
-	mostrarInicio = false; // Sal de la pantalla blanca
-	printf("Tecla 1 presionada\n");
+void reproducirAudio(int nivel) {
+	// Detener el audio actual si ya hay uno reproduciéndose
+	if (audioReproduciendo) {
+		PlaySound(NULL, NULL, 0); // Detiene cualquier sonido en reproducción
+	}
+
+	// Inicia el audio del nuevo nivel
+	switch (nivel)
+	{
+	case 1:
+		PlaySound(TEXT("Audio/AudioN1.wav"), NULL, SND_ASYNC);
+		break;
+	case 2:
+		PlaySound(TEXT("Audio/AudioN2.wav"), NULL, SND_ASYNC);
+		break;
+	case 3:
+		PlaySound(TEXT("Audio/AudioN3.wav"), NULL, SND_ASYNC);
+		break;
+	default:
+		break;
+	}
+
+	// Actualiza el estado
+	audioReproduciendo = true;
 }
 
-void dosTecleado() {
-	nivelActual = 2;
+void numTecleado(int nivel) {
+	reproducirAudio(nivel);
+	nivelActual = nivel;
 	mostrarInicio = false; // Sal de la pantalla blanca
-	printf("Tecla 2 presionada\n");
-}
-
-void tresTecleado() {
-	nivelActual = 3;
-	mostrarInicio = false; // Sal de la pantalla blanca
-	printf("Tecla 3 presionada\n");
+	printf("Tecla %d presionada\n", nivel);
 }
 
 void emeTecleado() {
