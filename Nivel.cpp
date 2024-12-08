@@ -388,14 +388,6 @@ bool checkScore() {
 /*
 CONTROLES
 */
-void controlesJuego(unsigned char key, int x, int y) {
-	switch (key) {
-	case 27: //Esc
-		exit(1);
-		break;
-	}
-}
-
 void controlesEspecial(int key, int x, int y) {
 	switch (key)
 	{
@@ -468,4 +460,3 @@ void mostrarFondo(int niveles) {
 		std::cerr << "Error: No se pudo obtener la textura actual.\n";
 	}
 }
-

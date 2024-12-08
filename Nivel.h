@@ -36,7 +36,6 @@ void agregarFlechaUP(int n);
 void agregarFlechaDW(int n);
 void agregarFlechaRT(int n);
 void finishLevel(int);
-void controlesJuego(unsigned char key, int x, int y);
 void controlesEspecial(int key, int x, int y);
 
 void cargarImagenes(const std::string& nombre1, const std::string& ruta1,
