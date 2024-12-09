@@ -84,7 +84,7 @@ void inicializacion() {
 	// Inicializar pantalla de inicio y cargar imágenes
 	pantallaInicio = new Inicio(&gestorRecursos, 200); // Cambiar cada 500 ms
 	pantallaInicio->cargarImagenes("inicio1", "Imagenes/Inicio/inicio1.png", "inicio2", "Imagenes/Inicio/inicio2.png");
-
+	reproducirAudio(nivelActual);
 }
 
 void mostrar() {
@@ -183,7 +183,19 @@ void enterTecleado() {
 	if (nivelActual == 0) { // Estamos en mapa
 		printf("Estamos en Mapa: %d\n", nivelActual);
 		printf("Se entro al IF, nivel actual: %d\n", nivelActual);
-
+		switch (nivelesDesbloqueados) {
+			case 1:
+				numTecleado(1);
+				break;
+			case 2:
+				numTecleado(2);
+				break;
+			case 3:
+				numTecleado(3);
+				break;
+			default:
+				break;
+		}
 
 	}
 	else { // Estamos en inicio
@@ -208,14 +220,17 @@ void reproducirAudio(int nivel) {
 	// Inicia el audio del nuevo nivel
 	switch (nivel)
 	{
+	case -1:
+		PlaySound(TEXT("Audio/AudioInit.wav"), NULL, SND_ASYNC | SND_LOOP);
+		break;
 	case 1:
-		PlaySound(TEXT("Audio/AudioN1.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Audio/AudioN1.wav"), NULL, SND_ASYNC | SND_LOOP);
 		break;
 	case 2:
-		PlaySound(TEXT("Audio/AudioN2.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Audio/AudioN2.wav"), NULL, SND_ASYNC | SND_LOOP);
 		break;
 	case 3:
-		PlaySound(TEXT("Audio/AudioN3.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Audio/AudioN3.wav"), NULL, SND_ASYNC | SND_LOOP);
 		break;
 	default:
 		break;
@@ -238,6 +253,7 @@ void numTecleado(int nivel) {
 void emeTecleado() {
 	printf("Tecla m presionada\n");
 	nivelActual = -1;
+	reproducirAudio(nivelActual);
 	mostrarInicio = true; // Activa la pantalla blanca
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fondo blanco
 }

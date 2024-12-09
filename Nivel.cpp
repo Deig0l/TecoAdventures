@@ -31,6 +31,7 @@ float t6 = 87;
 bool win = false;
 bool scoreReset = false;
 bool flechasInicializadas = false;
+bool mostrarMensajeFin = false;
 
 float N1win = 140.0;
 
@@ -69,11 +70,16 @@ void inicializacionNivel(void) {
 /*
 NIVELES
 */
+void finalizarSecuencia(int) {
+	mostrarMensajeFin = true;
+}
+
 void crearNivel(int n) {
 	if (callingLevel != n) {
 		callingLevel = n;
 		scoreReset = true;
 		flechasInicializadas = false;
+		mostrarMensajeFin = false;
 	}
 
 	if (!flechasInicializadas) {
@@ -85,14 +91,17 @@ void crearNivel(int n) {
 		case 1:
 			velocidad = 0.1;
 			glutTimerFunc(0, secuenciaNivel1, 0); // Secuencia del nivel 1
+			glutTimerFunc(23000, finalizarSecuencia, 0);
 			break;
 		case 2:
 			velocidad = 0.2;
 			glutTimerFunc(0, secuenciaNivel2, 0); // Secuencia del nivel 2
+			glutTimerFunc(22000, finalizarSecuencia, 0);
 			break;
 		case 3:
 			velocidad = 0.3;
 			glutTimerFunc(0, secuenciaNivel3, 0); // Secuencia del nivel 3
+			glutTimerFunc(19000, finalizarSecuencia, 0);
 			break;
 		default:
 			break;
@@ -129,6 +138,8 @@ void mostrarNivel(void) {
 	fUPSilueta.dibujar();
 	fLFSilueta.dibujar();
 	fRTSilueta.dibujar();
+
+	mostrarMensajeFinal();
 
 	glEnable(GL_TEXTURE_2D); // Activa texturas
 	glEnable(GL_BLEND);      // Activa blending
@@ -341,7 +352,7 @@ void finishLevel(int) {
 }
 
 /*
-SCORE
+SCORE Y MENSAJES
 */
 void writeBitmapString(void* font, const char* string) {
 	const char* c;
@@ -365,8 +376,20 @@ void escribirPuntuacion() {
 	glEnable(GL_BLEND);      // Activa blending
 }
 
+//Metodo inutil
 bool checkScore() {
 	return (score >= 160);
+}
+
+void mostrarMensajeFinal() {
+	if (mostrarMensajeFin) {
+		glColor3f(1.0, 1.0, 0.0); // Color amarillo
+		glRasterPos2f(300.0, 320.0); // Posición en la pantalla
+		string mensaje = "¡Nivel completado!";
+		writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, mensaje.c_str());
+
+		//MessageBoxA(NULL, "Nivel completado", "Teco's adventures", 0);
+	}
 }
 
 /*
