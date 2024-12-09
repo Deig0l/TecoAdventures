@@ -388,12 +388,9 @@ void mostrarMensajeFinal() {
 		string mensaje = "¡Nivel completado!";
 		writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, mensaje.c_str());
 
-		MessageBoxA(NULL, "Nivel completado", "Teco's adventures", 0);
-
+		//MessageBoxA(NULL, "Nivel completado", "Teco's adventures", 0);
 	}
 }
-/*MessageBoxA(NULL, "Nivel terminado", "TecoAdventures", 0);
-	exit(0);*/
 
 /*
 CONTROLES
