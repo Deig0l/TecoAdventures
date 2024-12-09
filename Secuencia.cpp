@@ -165,26 +165,101 @@ void secuenciaNivel2(int) {
 }
 
 void secuenciaNivel3(int) {
-	glutTimerFunc(1000, agregarFlechaUP, 0);
-	glutTimerFunc(1500, agregarFlechaLF, 0);
-	glutTimerFunc(2500, agregarFlechaRT, 0);
-	glutTimerFunc(3000, agregarFlechaDW, 0);
-	glutTimerFunc(3500, agregarFlechaUP, 1);
-	glutTimerFunc(4000, agregarFlechaLF, 1);
-	glutTimerFunc(4000, agregarFlechaRT, 1);
-	glutTimerFunc(5000, agregarFlechaDW, 1);
-	glutTimerFunc(6000, agregarFlechaUP, 2);
-	glutTimerFunc(7000, agregarFlechaDW, 2);
-	glutTimerFunc(7000, agregarFlechaLF, 2);
-	glutTimerFunc(8000, agregarFlechaUP, 3);
-	glutTimerFunc(8000, agregarFlechaRT, 2);
-	glutTimerFunc(9000, agregarFlechaDW, 3);
-	glutTimerFunc(10000, agregarFlechaLF, 3);
-	glutTimerFunc(11000, agregarFlechaUP, 4);
-	glutTimerFunc(12000, agregarFlechaLF, 4);
-	glutTimerFunc(12000, agregarFlechaRT, 3);
-	glutTimerFunc(13000, agregarFlechaDW, 4);
-	glutTimerFunc(14500, agregarFlechaRT, 4);
+	glutTimerFunc(0, agregarFlechaRT, 0);
+	glutTimerFunc(0, agregarFlechaDW, 0);
+	glutTimerFunc(500, agregarFlechaLF, 0);
+	glutTimerFunc(500, agregarFlechaUP, 0);
+	glutTimerFunc(1000, agregarFlechaDW, 1);
+	glutTimerFunc(1500, agregarFlechaUP, 1);
+
+	glutTimerFunc(2000, agregarFlechaRT, 1);
+	glutTimerFunc(2200, agregarFlechaDW, 2);
+	glutTimerFunc(2400, agregarFlechaUP, 2);
+	glutTimerFunc(2600, agregarFlechaLF, 1);
+
+	glutTimerFunc(3000, agregarFlechaUP, 3);
+	glutTimerFunc(3500, agregarFlechaDW, 3);
+
+	glutTimerFunc(4000, agregarFlechaLF, 2);
+	glutTimerFunc(4500, agregarFlechaDW, 4);
+
+	glutTimerFunc(5000, agregarFlechaUP, 4);
+	glutTimerFunc(5500, agregarFlechaLF, 3);
+	glutTimerFunc(6000, agregarFlechaRT, 2);
+	glutTimerFunc(6500, agregarFlechaDW, 5);
+	glutTimerFunc(7000, agregarFlechaUP, 5);
+	glutTimerFunc(7500, agregarFlechaLF, 4);
+	glutTimerFunc(8000, agregarFlechaRT, 3);
+	glutTimerFunc(8500, agregarFlechaDW, 6);
+	glutTimerFunc(9000, agregarFlechaUP, 6);
+	glutTimerFunc(9500, agregarFlechaDW, 7);
+	glutTimerFunc(9500, agregarFlechaLF, 5);
+	glutTimerFunc(10000, agregarFlechaUP, 7);
+	glutTimerFunc(10000, agregarFlechaRT, 4);
+	glutTimerFunc(10500, agregarFlechaDW, 8);
+	glutTimerFunc(11000, agregarFlechaLF, 6);
+	glutTimerFunc(11500, agregarFlechaUP, 8);
+	glutTimerFunc(12000, agregarFlechaLF, 7);
+	glutTimerFunc(12000, agregarFlechaRT, 5);
+	glutTimerFunc(12500, agregarFlechaDW, 9);
+	glutTimerFunc(13000, agregarFlechaRT, 6);
+
+	glutTimerFunc(13300, agregarFlechaLF, 8);
+	glutTimerFunc(13600, agregarFlechaUP, 9);
+	glutTimerFunc(13900, agregarFlechaDW, 0);
+	glutTimerFunc(14200, agregarFlechaRT, 7);
+	glutTimerFunc(14500, agregarFlechaUP, 0);
+	glutTimerFunc(14800, agregarFlechaDW, 1);
+	glutTimerFunc(15100, agregarFlechaRT, 8);
+
+	glutTimerFunc(15500, agregarFlechaRT, 9);
+	glutTimerFunc(16000, agregarFlechaDW, 2);
+	glutTimerFunc(16500, agregarFlechaUP, 1);
+	glutTimerFunc(17000, agregarFlechaLF, 9);
+	glutTimerFunc(17500, agregarFlechaDW, 3);
+	glutTimerFunc(18000, agregarFlechaUP, 2);
+	glutTimerFunc(18500, agregarFlechaLF, 0);
+
+	glutTimerFunc(19000, agregarFlechaUP, 3);
+	glutTimerFunc(19500, agregarFlechaLF, 1);
+	glutTimerFunc(20000, agregarFlechaRT, 0);
+	glutTimerFunc(20500, agregarFlechaDW, 4);
+	glutTimerFunc(21000, agregarFlechaUP, 4);
+	glutTimerFunc(21500, agregarFlechaLF, 2);
+	glutTimerFunc(22000, agregarFlechaRT, 1);
+	glutTimerFunc(22500, agregarFlechaDW, 5);
+	glutTimerFunc(23000, agregarFlechaUP, 5);
+	glutTimerFunc(23500, agregarFlechaDW, 6);
+	glutTimerFunc(23500, agregarFlechaLF, 3);
+	glutTimerFunc(24000, agregarFlechaUP, 6);
+	glutTimerFunc(24000, agregarFlechaRT, 2);
+	glutTimerFunc(24500, agregarFlechaDW, 7);
+	glutTimerFunc(25000, agregarFlechaLF, 4);
+	glutTimerFunc(25500, agregarFlechaUP, 7);
+	glutTimerFunc(26000, agregarFlechaLF, 5);
+	glutTimerFunc(26000, agregarFlechaRT, 3);
+	glutTimerFunc(26500, agregarFlechaDW, 8);
+	glutTimerFunc(27000, agregarFlechaRT, 4);
+	
+	glutTimerFunc(27500, agregarFlechaLF, 6);
+	glutTimerFunc(27500, agregarFlechaRT, 5);
+	glutTimerFunc(28000, agregarFlechaLF, 7);
+	glutTimerFunc(28000, agregarFlechaRT, 6);
+
+	glutTimerFunc(28500, agregarFlechaUP, 8);
+	glutTimerFunc(28800, agregarFlechaRT, 7);
+	glutTimerFunc(29100, agregarFlechaDW, 9);
+	glutTimerFunc(29400, agregarFlechaLF, 8);
+
+	glutTimerFunc(30000, agregarFlechaUP, 9);
+	glutTimerFunc(30000, agregarFlechaRT, 8);
+	glutTimerFunc(30500, agregarFlechaUP, 0);
+	glutTimerFunc(30500, agregarFlechaRT, 9);
+
+	glutTimerFunc(31000, agregarFlechaDW, 0);
+	glutTimerFunc(31000, agregarFlechaLF, 9);
+	glutTimerFunc(31500, agregarFlechaDW, 1);
+	glutTimerFunc(31500, agregarFlechaLF, 0);
 
 	//Finish game
 	//glutTimerFunc(19500, finishGame, 0);

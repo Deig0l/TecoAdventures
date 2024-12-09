@@ -103,6 +103,7 @@ void crearNivel(int n) {
 		case 3:
 			velocidad = 0.3;
 			glutTimerFunc(0, secuenciaNivel3, 0); // Secuencia del nivel 3
+			maxScore = 840;
 			glutTimerFunc(40000, finalizarSecuencia, 0);
 			break;
 		default:
