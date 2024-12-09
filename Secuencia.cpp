@@ -19,30 +19,38 @@ void secuenciaNivel1(int) {
 	glutTimerFunc(11500, agregarFlechaLF, 4);
 	glutTimerFunc(12000, agregarFlechaUP, 4);
 	glutTimerFunc(12300, agregarFlechaDW, 3);
+
 	glutTimerFunc(14500, agregarFlechaRT, 4);
 	glutTimerFunc(14500, agregarFlechaDW, 4);
 	glutTimerFunc(15500, agregarFlechaLF, 5);
 	glutTimerFunc(15500, agregarFlechaUP, 5);
 	glutTimerFunc(16500, agregarFlechaDW, 5);
 	glutTimerFunc(17500, agregarFlechaUP, 6);
+	
 	glutTimerFunc(18500, agregarFlechaRT, 5);
 	glutTimerFunc(18700, agregarFlechaDW, 6);
 	glutTimerFunc(18900, agregarFlechaUP, 7);
 	glutTimerFunc(19100, agregarFlechaLF, 6);
+
 	glutTimerFunc(20000, agregarFlechaUP, 8);
 	glutTimerFunc(21000, agregarFlechaDW, 7);
+	
 	glutTimerFunc(22000, agregarFlechaLF, 7);
 	glutTimerFunc(22300, agregarFlechaDW, 8);
+
 	glutTimerFunc(24300, agregarFlechaRT, 6);
 	glutTimerFunc(24500, agregarFlechaUP, 9);
 	glutTimerFunc(25300, agregarFlechaLF, 8);
 	glutTimerFunc(25500, agregarFlechaDW, 9);
+
 	glutTimerFunc(26000, agregarFlechaRT, 7);
 	glutTimerFunc(27000, agregarFlechaRT, 8);
+
 	glutTimerFunc(28000, agregarFlechaLF, 9);
 	glutTimerFunc(28000, agregarFlechaRT, 9);
 	glutTimerFunc(29000, agregarFlechaUP, 0);
 	glutTimerFunc(29000, agregarFlechaDW, 0);
+
 	glutTimerFunc(30000, agregarFlechaLF, 0);
 	glutTimerFunc(30500, agregarFlechaRT, 0);
 	glutTimerFunc(31000, agregarFlechaLF, 1);
