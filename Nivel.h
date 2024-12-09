@@ -19,6 +19,7 @@
 using namespace std;
 
 void inicializarFlechas();
+void finalizarSecuencia(int);
 void crearNivel(int n);
 void inicializacionNivel(void);
 void writeBitmapString(void* font, const char* string);
@@ -27,6 +28,7 @@ void escribirPuntuacion();
 void inicializarFlechas();
 void dibujarFlechas();
 void obtenerPuntos(float y);
+void mostrarMensajeFinal();
 void calificarFlechaLF();
 void calificarFlechaUP();
 void calificarFlechaDW();

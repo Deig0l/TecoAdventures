@@ -209,13 +209,13 @@ void reproducirAudio(int nivel) {
 	switch (nivel)
 	{
 	case 1:
-		PlaySound(TEXT("Audio/AudioN1.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Audio/AudioN1.wav"), NULL, SND_ASYNC | SND_LOOP);
 		break;
 	case 2:
-		PlaySound(TEXT("Audio/AudioN2.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Audio/AudioN2.wav"), NULL, SND_ASYNC | SND_LOOP);
 		break;
 	case 3:
-		PlaySound(TEXT("Audio/AudioN3.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Audio/AudioN3.wav"), NULL, SND_ASYNC | SND_LOOP);
 		break;
 	default:
 		break;
