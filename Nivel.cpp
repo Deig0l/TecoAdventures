@@ -33,7 +33,7 @@ bool scoreReset = false;
 bool flechasInicializadas = false;
 bool mostrarMensajeFin = false;
 
-float N1win = 140.0;
+int maxScore;
 
 int topLF = 0;
 int topUP = 0;
@@ -91,6 +91,7 @@ void crearNivel(int n) {
 		case 1:
 			velocidad = 0.1;
 			glutTimerFunc(0, secuenciaNivel1, 0); // Secuencia del nivel 1
+			maxScore = 460;
 			glutTimerFunc(40000, finalizarSecuencia, 0);
 			break;
 		case 2:
@@ -417,15 +418,38 @@ bool checkScore() {
 	return (score >= 160);
 }
 
-void mostrarMensajeFinal() {
-	if (mostrarMensajeFin) {
-		glColor3f(1.0, 1.0, 0.0); // Color amarillo
-		glRasterPos2f(300.0, 320.0); // Posición en la pantalla
-		string mensaje = "¡Nivel completado!";
-		writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, mensaje.c_str());
+//void mostrarMensajeFinal() {
+//	if (mostrarMensajeFin) {
+//		glColor3f(1.0, 1.0, 0.0); // Color amarillo
+//		glRasterPos2f(300.0, 320.0); // Posición en la pantalla
+//		string mensaje = "¡Nivel completado!";
+//		writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, mensaje.c_str());
+//
+//		//MessageBoxA(NULL, "Nivel completado", "Teco's adventures", 0);
+//	}
+//}
 
+void mostrarMensajeFinal() {
+	/*if (mostrarMensajeFin) {*/
+		int calificacion = (score * 100) / maxScore;
+		string mensaje = "";
+		if (calificacion >= 70) {
+			asignarColor(GREEN);
+			mensaje = "APROBADO";
+			glRasterPos2f(340.0, 320.0); // Posición en la pantalla
+		}
+		else {
+			asignarColor(BLUE);
+			mensaje = "REPROBADO";
+			glRasterPos2f(325.0, 320.0); // Posición en la pantalla
+		}
+		writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, mensaje.c_str());
+		glRasterPos2f(330.0, 290.0); // Posición en la pantalla
+		string caltxt = "Calificacion: ";
+		caltxt += to_string(calificacion);
+		writeBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, caltxt.c_str());
 		//MessageBoxA(NULL, "Nivel completado", "Teco's adventures", 0);
-	}
+	/*}*/
 }
 
 /*
