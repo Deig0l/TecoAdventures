@@ -91,17 +91,17 @@ void crearNivel(int n) {
 		case 1:
 			velocidad = 0.1;
 			glutTimerFunc(0, secuenciaNivel1, 0); // Secuencia del nivel 1
-			glutTimerFunc(23000, finalizarSecuencia, 0);
+			glutTimerFunc(40000, finalizarSecuencia, 0);
 			break;
 		case 2:
 			velocidad = 0.2;
 			glutTimerFunc(0, secuenciaNivel2, 0); // Secuencia del nivel 2
-			glutTimerFunc(22000, finalizarSecuencia, 0);
+			glutTimerFunc(40000, finalizarSecuencia, 0);
 			break;
 		case 3:
 			velocidad = 0.3;
 			glutTimerFunc(0, secuenciaNivel3, 0); // Secuencia del nivel 3
-			glutTimerFunc(19000, finalizarSecuencia, 0);
+			glutTimerFunc(40000, finalizarSecuencia, 0);
 			break;
 		default:
 			break;
@@ -185,7 +185,16 @@ void dibujarFlechas() {
 				fLFArray[i].dibujar();
 			}
 			else {
+				if (i == topLF) {
+					if (topLF < numFlechas - 1) {
+						topLF++;
+					}
+					else {
+						topLF = 0;
+					}
+				}
 				fLFArray[i].setMover(false); // Detenemos flechas al final
+				fLFArray[i].setY(posicionOrigenY);
 			}
 		}
 	}
@@ -196,7 +205,16 @@ void dibujarFlechas() {
 				fUPArray[i].dibujar();
 			}
 			else {
+				if (i == topUP) {
+					if (topUP < numFlechas - 1) {
+						topUP++;
+					}
+					else {
+						topUP = 0;
+					}
+				}
 				fUPArray[i].setMover(false); // Detenemos flechas al final
+				fUPArray[i].setY(posicionOrigenY);
 			}
 		}
 	}
@@ -207,7 +225,16 @@ void dibujarFlechas() {
 				fDWArray[i].dibujar();
 			}
 			else {
+				if (i == topDW) {
+					if (topDW < numFlechas - 1) {
+						topDW++;
+					}
+					else {
+						topDW = 0;
+					}
+				}
 				fDWArray[i].setMover(false); // Detenemos flechas al final
+				fDWArray[i].setY(posicionOrigenY);
 			}
 		}
 	}
@@ -218,7 +245,16 @@ void dibujarFlechas() {
 				fRTArray[i].dibujar();
 			}
 			else {
+				if (i == topRT) {
+					if (topRT < numFlechas - 1) {
+						topRT++;
+					}
+					else {
+						topRT = 0;
+					}
+				}
 				fRTArray[i].setMover(false); // Detenemos flechas al final
+				fRTArray[i].setY(posicionOrigenY);
 			}
 		}
 	}
